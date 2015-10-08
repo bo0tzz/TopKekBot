@@ -109,6 +109,11 @@ public class TopKekCommandListener implements Listener {
                 break;
             }
 
+            case "source": {
+                event.getChat().sendMessage("The bot's source can be found over on https://github.com/bo0tzz/TopKekBot", bot);
+                break;
+            }
+
             case "tweet": {
                 String tweet;
                 if (event.getMessage().getSender().getUsername().equals("bo0tzz")) {
