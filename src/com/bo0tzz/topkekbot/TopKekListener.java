@@ -1,8 +1,12 @@
 package com.bo0tzz.topkekbot;
 
 import pro.zackpollard.telegrambot.api.TelegramBot;
+import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
+import pro.zackpollard.telegrambot.api.chat.message.send.SendableAudioMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
+
+import java.io.File;
 
 /**
  * Created by bo0tzz
@@ -23,6 +27,11 @@ public class TopKekListener implements Listener {
             event.getChat().sendMessage("Pleb, yes.", bot);
         } else if (message.equalsIgnoreCase("thank mr bot")) {
             event.getChat().sendMessage("may good cpus and dedotated wams come to you", bot);
+        } else if (message.equalsIgnoreCase("nice meme")) {
+            InputFile meme = new InputFile("AwADBAADAgAD44X6A_37JQhu46N4Ag");
+            event.getChat().sendMessage(SendableAudioMessage.builder().audio(meme).build(), bot);
+        } else if (message.equals("fish go moo")) {
+            event.getChat().sendMessage("TopKekBot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.", bot);
         }
     }
 }

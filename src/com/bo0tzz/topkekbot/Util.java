@@ -18,7 +18,9 @@ public class Util {
 
     public static String KEY_URBAND = "dizTuKjw5YmshkKeiWx81uNJveqyp1ZzzudjsnlR2vv3ivQ7NM";
 
-    private static String url = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=";
+
+    private static String KEY_OWM = "a81a1c5ad56bee73f957cc529ed07fa2";
+    private static String url = "http://api.openweathermap.org/data/2.5/weather?units=imperial&APPID=" + KEY_OWM + "&q=";
 
     public static String getWeather(String location, Chat chat) throws JSONException, IOException {
         String call = (url + location).replace(' ', '+');
