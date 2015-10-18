@@ -9,6 +9,7 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.CommandMessageReceivedEvent;
 
+import java.net.SocketTimeoutException;
 import java.net.URLEncoder;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -32,7 +33,7 @@ public class TopKekCommandListener implements Listener {
                     event.getChat().sendMessage("Give me choices!", bot);
                 } else {
                     String choice = args[ThreadLocalRandom.current().nextInt(args.length)];
-                    event.getChat().sendMessage("I say " + choice, bot);
+                    event.getChat().sendMessage(SendableTextMessage.builder().message("I say " + choice).replyTo(event.getMessage()).build(), bot);
                 }
                 break;
             }
@@ -64,6 +65,7 @@ public class TopKekCommandListener implements Listener {
                 try {
                     event.getChat().sendMessage(SendableTextMessage.builder()
                             .message(Util.getWeather(event.getArgsString(), event.getChat()))
+                            .replyTo(event.getMessage())
                             .build(), bot);
                 } catch (Exception e) {
                     event.getChat().sendMessage(SendableTextMessage.builder().message("THE FUCKING WEATHER MODULE FAILED FUCK!").build(), bot);
@@ -75,7 +77,7 @@ public class TopKekCommandListener implements Listener {
             case "8ball": {
                 String[] options = new String[]{"It is certain", "It is decidedly so", "Without a doubt", "Yes definitely", "You may rely on it", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"};
                 int chosen = ThreadLocalRandom.current().nextInt(options.length);
-                event.getChat().sendMessage(SendableTextMessage.builder().message(options[chosen]).build(), bot);
+                event.getChat().sendMessage(SendableTextMessage.builder().message(options[chosen]).replyTo(event.getMessage()).build(), bot);
                 break;
             }
 
@@ -126,30 +128,33 @@ public class TopKekCommandListener implements Listener {
                 break;
             }
 
-            case "roll": {
-                String[] num = event.getArgsString().split("d");
-                int count;
-                int val;
-                StringBuilder out = new StringBuilder("Results: [");
-                try {
-                    count = Integer.parseInt(num[0]);
-                    val = Integer.parseInt(num[1]) + 1;
-                    int[] results = new int[count];
-                    for (int i = 0; i < count; i++) {
-                        results[i] = ThreadLocalRandom.current().nextInt(1, val);
+        case "roll": {
+                new Thread(() -> {
+                    String[] num = event.getArgsString().split("d");
+                    int count;
+                    int val;
+                    StringBuilder out = new StringBuilder("Results: [");
+                    try {
+                        count = Integer.parseInt(num[0]);
+                        val = Integer.parseInt(num[1]) + 1;
+                        int[] results = new int[count];
+                        for (int i = 0; i < count; i++) {
+                            results[i] = ThreadLocalRandom.current().nextInt(1, val);
+                        }
+                        for (int result : results) {
+                            out.append(result).append(",");
+                        }
+                        out.deleteCharAt(out.length() - 1).append("]");
+                        event.getChat().sendMessage(SendableTextMessage.builder()
+                                .message(out.toString())
+                                .replyTo(event.getMessage())
+                                .build(), bot);
+                    } catch (NumberFormatException ex) {
+                        event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
+                    } catch (OutOfMemoryError ex) {
+                        event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
                     }
-                    for (int result : results) {
-                        out.append(result).append(",");
-                    }
-                    out.deleteCharAt(out.length() - 1).append("]");
-                } catch (NumberFormatException ex) {
-                    event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
-                    break;
-                } catch (OutOfMemoryError ex) {
-                    event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
-                    break;
-                }
-                event.getChat().sendMessage(out.toString(), bot);
+                }).start();
                 break;
             }
         }
