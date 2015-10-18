@@ -9,7 +9,6 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.CommandMessageReceivedEvent;
 
-import java.net.SocketTimeoutException;
 import java.net.URLEncoder;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -129,33 +128,35 @@ public class TopKekCommandListener implements Listener {
             }
 
         case "roll": {
-                new Thread(() -> {
-                    String[] num = event.getArgsString().split("d");
-                    int count;
-                    int val;
-                    StringBuilder out = new StringBuilder("Results: [");
-                    try {
-                        count = Integer.parseInt(num[0]);
-                        val = Integer.parseInt(num[1]) + 1;
-                        int[] results = new int[count];
-                        for (int i = 0; i < count; i++) {
-                            results[i] = ThreadLocalRandom.current().nextInt(1, val);
-                        }
-                        for (int result : results) {
-                            out.append(result).append(",");
-                        }
-                        out.deleteCharAt(out.length() - 1).append("]");
-                        event.getChat().sendMessage(SendableTextMessage.builder()
-                                .message(out.toString())
-                                .replyTo(event.getMessage())
-                                .build(), bot);
-                    } catch (NumberFormatException ex) {
-                        event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
-                    } catch (OutOfMemoryError ex) {
-                        event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
+            new Thread(() -> {
+                String[] num = event.getArgsString().split("d");
+                int count;
+                int val;
+                StringBuilder out = new StringBuilder("Results: [");
+                try {
+                    count = Integer.parseInt(num[0]);
+                    val = Integer.parseInt(num[1]) + 1;
+                    if (count > 1000 || val > 1001) {
+                        throw new NumberFormatException();
+                    }                    int[] results = new int[count];
+                    for (int i = 0; i < count; i++) {
+                        results[i] = ThreadLocalRandom.current().nextInt(1, val);
                     }
-                }).start();
-                break;
+                    for (int result : results) {
+                        out.append(result).append(",");
+                    }
+                    out.deleteCharAt(out.length() - 1).append("]");
+                    event.getChat().sendMessage(SendableTextMessage.builder()
+                            .message(out.toString())
+                            .replyTo(event.getMessage())
+                            .build(), bot);
+                } catch (NumberFormatException ex) {
+                    event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
+                } catch (OutOfMemoryError ex) {
+                    event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
+                }
+            }).start();
+            break;
             }
         }
     }

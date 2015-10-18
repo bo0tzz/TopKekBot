@@ -32,6 +32,8 @@ public class TopKekListener implements Listener {
             event.getChat().sendMessage(SendableAudioMessage.builder().audio(meme).build(), bot);
         } else if (message.equals("fish go moo")) {
             event.getChat().sendMessage("TopKekBot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.", bot);
+        } else if (message.equals("tfw")) {
+            event.getChat().sendMessage("no gf", bot);
         }
     }
 }
