@@ -123,6 +123,34 @@ public class TopKekCommandListener implements Listener {
                 }
                 System.out.println(("Tweeting: " + tweet));
                 Tweeter.getInstance().sendTweet(tweet);
+                break;
+            }
+
+            case "roll": {
+                String[] num = event.getArgsString().split("d");
+                int count;
+                int val;
+                StringBuilder out = new StringBuilder("Results: [");
+                try {
+                    count = Integer.parseInt(num[0]);
+                    val = Integer.parseInt(num[1]) + 1;
+                    int[] results = new int[count];
+                    for (int i = 0; i < count; i++) {
+                        results[i] = ThreadLocalRandom.current().nextInt(1, val);
+                    }
+                    for (int result : results) {
+                        out.append(result).append(",");
+                    }
+                    out.deleteCharAt(out.length() - 1).append("]");
+                } catch (NumberFormatException ex) {
+                    event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
+                    break;
+                } catch (OutOfMemoryError ex) {
+                    event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
+                    break;
+                }
+                event.getChat().sendMessage(out.toString(), bot);
+                break;
             }
         }
     }
