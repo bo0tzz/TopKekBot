@@ -136,9 +136,10 @@ public class TopKekCommandListener implements Listener {
                 try {
                     count = Integer.parseInt(num[0]);
                     val = Integer.parseInt(num[1]) + 1;
-                    if (count > 1000 || val > 1001) {
-                        throw new NumberFormatException();
-                    }                    int[] results = new int[count];
+                    if (count < 1 || val < 1 || count > 1000 || val > 1001) {
+                        throw new IllegalArgumentException();
+                    }
+                    int[] results = new int[count];
                     for (int i = 0; i < count; i++) {
                         results[i] = ThreadLocalRandom.current().nextInt(1, val);
                     }
@@ -150,7 +151,7 @@ public class TopKekCommandListener implements Listener {
                             .message(out.toString())
                             .replyTo(event.getMessage())
                             .build(), bot);
-                } catch (NumberFormatException ex) {
+                } catch (IllegalArgumentException ex) {
                     event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
                 } catch (OutOfMemoryError ex) {
                     event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
