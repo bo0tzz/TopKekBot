@@ -137,7 +137,7 @@ public class TopKekCommandListener implements Listener {
                     count = Integer.parseInt(num[0]);
                     val = Integer.parseInt(num[1]) + 1;
                     if (count < 1 || val < 1 || count > 1000 || val > 1001) {
-                        throw new IllegalArgumentException();
+                        throw new IllegalArgumentException("topkek");
                     }
                     int[] results = new int[count];
                     for (int i = 0; i < count; i++) {
