@@ -9,24 +9,40 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
  */
 public class TopKekBot {
 
-    public static TelegramBot bot;
-    public static Tweeter twitter;
+    private final TelegramBot bot;
+
+    private final Tweeter twitter;
+
+    private TopKekBot(String authToken) {
+        this.bot = TelegramBot.login(authToken);
+        System.out.println("Bot logged in: " + this.bot.toString());
+        this.twitter = Tweeter.getInstance(this.bot);
+        System.out.println("Twitter API initialised");
+    }
 
     public static void main(String[] args) {
-        bot = TelegramBot.login(args[0]);
-        System.out.println("Bot logged in: " + bot.toString());
-        bot.getEventsManager().register(new TopKekListener(bot));
-        bot.getEventsManager().register(new TopKekCommandListener(bot));
+        if (args.length < 1) {
+            System.out.println("Missing auth token.");
+            System.exit(0);
+        }
+        new TopKekBot(args[0]).run();
+    }
+
+    public void run() {
+        this.bot.getEventsManager().register(new TopKekListener(bot));
+        this.bot.getEventsManager().register(new TopKekCommandListener(bot));
         System.out.println("Listener Registered");
-        twitter = Tweeter.getInstance();
-        System.out.println("Twitter API initialised");
-        bot.startUpdates(false);
+        this.bot.startUpdates(false);
         System.out.println("Updates started.");
 
         Chat mazenchat = TelegramBot.getChat(-17349250);
         while (true) {
             SendableTextMessage message = SendableTextMessage.builder().message(System.console().readLine()).build();
-            bot.sendMessage(mazenchat, message);
+            this.bot.sendMessage(mazenchat, message);
         }
+    }
+
+    public Tweeter getTweeter() {
+        return this.twitter;
     }
 }
