@@ -2,8 +2,6 @@ package com.bo0tzz.topkekbot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import pro.zackpollard.telegrambot.api.chat.Chat;
-import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,28 +20,29 @@ public class Util {
     private static String KEY_OWM = "a81a1c5ad56bee73f957cc529ed07fa2";
     private static String url = "http://api.openweathermap.org/data/2.5/weather?units=imperial&APPID=" + KEY_OWM + "&q=";
 
-    public static String getWeather(String location, Chat chat) throws JSONException, IOException {
+    public static String[] getWeather(String location) throws JSONException, IOException {
         String call = (url + location).replace(' ', '+');
         JSONObject json = new JSONObject(sendGet(call));
 
         if (json.getInt("cod") != 200) {
-            return "I CAN'T GET THE FUCKING WEATHER!";
+            return new String[]{"I CAN'T GET THE FUCKING WEATHER!"};
         }
 
         double temp = Math.round(json.getJSONObject("main").getDouble("temp"));
         double metric = Math.round((temp - 32) / 1.8000);
 
+        String t;
         if (temp <= 32) {
-            TopKekBot.bot.sendMessage(chat, SendableTextMessage.builder().message("ITS FUCKING FREEZING!").build());
+            t = "ITS FUCKING FREEZING!";
         } else if (temp >= 33 && temp <= 60) {
-            TopKekBot.bot.sendMessage(chat, SendableTextMessage.builder().message("ITS FUCKING COLD!").build());
+            t = "ITS FUCKING COLD!";
         } else if (temp >= 61 && temp <= 75) {
-            TopKekBot.bot.sendMessage(chat, SendableTextMessage.builder().message("ITS FUCKING NICE!").build());
+            t = "ITS FUCKING NICE!";
         } else {
-            TopKekBot.bot.sendMessage(chat, SendableTextMessage.builder().message("ITS FUCKING HOT").build());
+            t = "ITS FUCKING HOT";
         }
 
-        return "THE FUCKING WEATHER IN " + location.toUpperCase() + " IS " + temp + "F | " + metric + "C";
+        return new String[]{t, "THE FUCKING WEATHER IN " + location.toUpperCase() + " IS " + temp + "F | " + metric + "C"};
     }
 
     public static String sendGet(String url) throws IOException{
