@@ -1,6 +1,7 @@
-package com.bo0tzz.topkekbot;
+package com.bo0tzz.topkekbot.engine;
 
 
+import com.bo0tzz.topkekbot.TopKekBot;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import twitter4j.*;
@@ -11,13 +12,11 @@ import twitter4j.conf.ConfigurationBuilder;
  * Created by bo0tzz
  */
 public class Tweeter {
-    private static Tweeter instance;
-
     public static final String TWITTER_CONSUMER_KEY = "B6zyj5WJmGjCf4Iya5T0l3CDn";
     public static final String TWITTER_CONSUMER_SECRET = "T8f2mLGP4RnejFUHumkCHBRqhcfGORDfPM2AjWGts7ulpyVRdh";
     public static final String TWITTER_ACCESS_TOKEN = "3761163975-y8kkpPdGmMQx1sH8tMaTXoGIQSeghpj3sM4SH7r";
     public static final String TWITTER_ACCESS_SECRET = "kke6IKo7haOF6pz5t5ICN1ArCqsNxbFGgb9zqh1IPgWb5";
-
+    private static Tweeter instance;
     private Twitter twitter;
     private Configuration config;
 

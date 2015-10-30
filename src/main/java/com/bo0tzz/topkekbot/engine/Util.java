@@ -1,5 +1,6 @@
-package com.bo0tzz.topkekbot;
+package com.bo0tzz.topkekbot.engine;
 
+import com.bo0tzz.topkekbot.TopKekBot;
 import org.json.JSONException;
 import org.json.JSONObject;
 import pro.zackpollard.telegrambot.api.chat.Chat;
