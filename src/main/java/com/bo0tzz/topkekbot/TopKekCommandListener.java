@@ -48,27 +48,27 @@ public class TopKekCommandListener implements Listener {
     };
 
 
-    private final Map<String, Consumer<CommandMessageReceivedEvent>> commands = new HashMap<String, Consumer<CommandMessageReceivedEvent>>() {{
-        TopKekCommandListener that = TopKekCommandListener.this;
-        put("choice", that::choice);
-        put("define", that::define);
-        put("fuckingweather", that::fuckingweather);
-        put("8ball", that::eightball);
-        put("lmgtfy", that::lmgtfy);
-        put("lenny", (event) -> event.getChat().sendMessage("( ͡° ͜ʖ ͡°)", bot));
-        put("idk", (event) -> event.getChat().sendMessage("¯\\_(ツ)_/¯", bot));
-        put("flip", (event) -> event.getChat().sendMessage("(╯°□°）╯︵ ┻━┻", bot));
-        put("topkek", (event) -> event.getChat().sendMessage("http://s.mzn.pw/index.swf Gotta be safe while keking!", bot));
-        put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o", bot));
-        put("source", (event) -> event.getChat().sendMessage("The bot's source can be found over on https://github.com/bo0tzz/TopKekBot", bot));
-        put("tweet", that::tweet);
-        put("roll", that::roll);
-
-    }};
+    private final Map<String, Consumer<CommandMessageReceivedEvent>> commands;
 
     public TopKekCommandListener(TelegramBot bot, Tweeter tweeter) {
         this.bot = bot;
         this.tweeter = tweeter;
+        this.commands = new HashMap<String, Consumer<CommandMessageReceivedEvent>>() {{
+            TopKekCommandListener that = TopKekCommandListener.this;
+            put("choice", that::choice);
+            put("define", that::define);
+            put("fuckingweather", that::fuckingweather);
+            put("8ball", that::eightball);
+            put("lmgtfy", that::lmgtfy);
+            put("lenny", (event) -> event.getChat().sendMessage("( ͡° ͜ʖ ͡°)", bot));
+            put("idk", (event) -> event.getChat().sendMessage("¯\\_(ツ)_/¯", bot));
+            put("flip", (event) -> event.getChat().sendMessage("(╯°□°）╯︵ ┻━┻", bot));
+            put("topkek", (event) -> event.getChat().sendMessage("http://s.mzn.pw/index.swf Gotta be safe while keking!", bot));
+            put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o", bot));
+            put("source", (event) -> event.getChat().sendMessage("The bot's source can be found over on https://github.com/bo0tzz/TopKekBot", bot));
+            put("tweet", that::tweet);
+            put("roll", that::roll);
+        }};
     }
 
     @Override

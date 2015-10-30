@@ -29,20 +29,20 @@ public class TopKekBot {
     }
 
     public void run() {
-        this.bot.getEventsManager().register(new TopKekListener(bot));
-        this.bot.getEventsManager().register(new TopKekCommandListener(bot));
+        this.bot.getEventsManager().register(new TopKekListener(this.bot));
+        this.bot.getEventsManager().register(new TopKekCommandListener(this.bot, this.twitter));
         System.out.println("Listener Registered");
         this.bot.startUpdates(false);
         System.out.println("Updates started.");
 
         Chat mazenchat = TelegramBot.getChat(-17349250);
         while (true) {
-            SendableTextMessage message = SendableTextMessage.builder().message(System.console().readLine()).build();
+            String in = System.console().readLine();
+            if ("quit".equals(in)) {
+                break;
+            }
+            SendableTextMessage message = SendableTextMessage.builder().message(in).build();
             this.bot.sendMessage(mazenchat, message);
         }
-    }
-
-    public Tweeter getTweeter() {
-        return this.twitter;
     }
 }

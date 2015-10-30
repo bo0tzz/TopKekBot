@@ -2,8 +2,6 @@ package com.bo0tzz.topkekbot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import pro.zackpollard.telegrambot.api.chat.Chat;
-import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class Util {
         double temp = Math.round(json.getJSONObject("main").getDouble("temp"));
         double metric = Math.round((temp - 32) / 1.8000);
 
-        String t = "";
+        String t;
         if (temp <= 32) {
             t = "ITS FUCKING FREEZING!";
         } else if (temp >= 33 && temp <= 60) {

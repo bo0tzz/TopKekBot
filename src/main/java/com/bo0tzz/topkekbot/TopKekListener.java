@@ -6,8 +6,6 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableAudioMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
-import java.io.File;
-
 /**
  * Created by bo0tzz
  */

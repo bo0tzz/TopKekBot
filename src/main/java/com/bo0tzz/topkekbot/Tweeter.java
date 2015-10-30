@@ -83,6 +83,7 @@ public class Tweeter {
                 SendableTextMessage message = SendableTextMessage.builder()
                         .message("Tweet by @" + status.getUser().getScreenName() + ": "
                                 + status.getText()).build();
+                Tweeter.this.bot.sendMessage(TelegramBot.getChat(-17349250), message);
             }
         }
 
