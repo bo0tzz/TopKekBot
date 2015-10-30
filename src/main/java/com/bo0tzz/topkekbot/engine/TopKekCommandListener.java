@@ -1,4 +1,4 @@
-package com.bo0tzz.topkekbot;
+package com.bo0tzz.topkekbot.engine;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
