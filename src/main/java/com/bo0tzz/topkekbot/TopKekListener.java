@@ -6,6 +6,9 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableAudioMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by bo0tzz
  */
@@ -26,7 +29,12 @@ public class TopKekListener implements Listener {
         } else if (message.equalsIgnoreCase("thank mr bot")) {
             event.getChat().sendMessage("may good cpus and dedotated wams come to you", bot);
         } else if (message.equalsIgnoreCase("nice meme")) {
-            InputFile meme = new InputFile("AwADBAADAgAD44X6A_37JQhu46N4Ag");
+            InputFile meme = null;
+            try {
+                meme = new InputFile(new URL("http://niceme.me/nicememe.mp3"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
             event.getChat().sendMessage(SendableAudioMessage.builder().audio(meme).build(), bot);
         } else if (message.equals("fish go moo")) {
             event.getChat().sendMessage("@TopKekBot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.", bot);
