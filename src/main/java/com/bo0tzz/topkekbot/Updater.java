@@ -13,10 +13,16 @@ import java.net.URL;
  */
 public class Updater implements Runnable {
 
+    TopKekBot topKekBot;
+
+    public Updater(TopKekBot topKekBot) {
+        this.topKekBot = topKekBot;
+    }
+
     @Override
     public void run() {
         File build = new File("build");
-        File jar = new File("TopKekBot.jar");
+        File jar = new File("TopKekBot.new");
         int currentBuild = 0;
         int newBuild = 0;
 
@@ -33,9 +39,13 @@ public class Updater implements Runnable {
                 e.printStackTrace();
             }
             if (newBuild > currentBuild) {
+                System.out.println("New build found!");
+                topKekBot.sendToMazen("New build found! Updating...");
                 try {
                     FileUtils.writeStringToFile(build, String.valueOf(newBuild));
                     FileUtils.copyURLToFile(new URL("http://ci.zackpollard.pro/job/TopKekBot/lastSuccessfulBuild/artifact/target/TopKekBot.jar"), jar);
+                    System.out.println("New build downloaded - restarting!");
+                    topKekBot.sendToMazen("New build downloaded - restarting!");
                 } catch (IOException e) {
                     System.err.println("Updater failed!");
                     e.printStackTrace();

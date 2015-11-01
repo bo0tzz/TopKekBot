@@ -29,7 +29,7 @@ public class TopKekBot {
     }
 
     public void run() {
-        new Thread(new Updater()).run();
+        new Thread(new Updater(this)).run();
         this.bot.getEventsManager().register(new TopKekListener(this.bot));
         this.bot.getEventsManager().register(new TopKekCommandListener(this.bot, this.twitter));
         System.out.println("Listener Registered");
@@ -45,5 +45,9 @@ public class TopKekBot {
             SendableTextMessage message = SendableTextMessage.builder().message(in).build();
             this.bot.sendMessage(mazenchat, message);
         }
+    }
+
+    public void sendToMazen(String message) {
+       TelegramBot.getChat(-17349250).sendMessage(message, this.bot);
     }
 }

@@ -26,6 +26,11 @@
             <artifactId>jtelegram-botapi</artifactId>
             <version>0.3.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.7</version>
+        </dependency>
     </dependencies>
     <packaging>jar</packaging>
 
@@ -48,17 +53,6 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>org.apache.httpcomponents:httpclient:*:*</exclude>
-                                    <exclude>org.apache.httpcomponents:httpclient:*:*</exclude>
-                                    <exclude>org.apache.httpcomponents:httpasyncclient:*:*</exclude>
-                                    <exclude>org.apache.httpcomponents:httpcore:*:*</exclude>
-                                    <exclude>org.apache.httpcomponents:httpcore-nio:*:*</exclude>
-                                </excludes>
-                            </artifactSet>
-                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
