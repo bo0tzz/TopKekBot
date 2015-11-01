@@ -29,7 +29,7 @@ public class TopKekBot {
     }
 
     public void run() {
-        new Thread(new Updater(this)).run();
+        new Thread(new Updater(this)).start();
         this.bot.getEventsManager().register(new TopKekListener(this.bot));
         this.bot.getEventsManager().register(new TopKekCommandListener(this.bot, this.twitter));
         System.out.println("Listener Registered");
