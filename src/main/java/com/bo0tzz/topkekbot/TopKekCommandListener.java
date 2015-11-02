@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 
 /**
  * Created by bo0tzz
+ * Enjoyed by stuntguy3000
  */
 public class TopKekCommandListener implements Listener {
 
@@ -129,10 +130,13 @@ public class TopKekCommandListener implements Listener {
         event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build(), bot);
     }
 
-    @SuppressWarnings("deprecation")
     private void lmgtfy(CommandMessageReceivedEvent event) {
         String encoded = URLEncoder.encode(event.getArgsString());
-        event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build(), bot);
+        if (encoded.isEmpty()) {
+            event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build(), bot);
+        } else {
+            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build(), bot);
+        }
     }
 
     private void tweet(CommandMessageReceivedEvent event) {
