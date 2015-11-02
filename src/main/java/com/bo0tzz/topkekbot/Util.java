@@ -45,7 +45,7 @@ public class Util {
         return new String[]{t, "THE FUCKING WEATHER IN " + location.toUpperCase() + " IS " + temp + "F | " + metric + "C"};
     }
 
-    public static String sendGet(String url) throws IOException{
+    public static String sendGet(String url) throws IOException {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
