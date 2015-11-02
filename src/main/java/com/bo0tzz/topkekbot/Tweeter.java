@@ -12,16 +12,11 @@ import twitter4j.conf.ConfigurationBuilder;
  */
 public class Tweeter {
 
-    private static Tweeter instance;
-
     public static final String TWITTER_CONSUMER_KEY = "B6zyj5WJmGjCf4Iya5T0l3CDn";
-
     public static final String TWITTER_CONSUMER_SECRET = "T8f2mLGP4RnejFUHumkCHBRqhcfGORDfPM2AjWGts7ulpyVRdh";
-
     public static final String TWITTER_ACCESS_TOKEN = "3761163975-y8kkpPdGmMQx1sH8tMaTXoGIQSeghpj3sM4SH7r";
-
     public static final String TWITTER_ACCESS_SECRET = "kke6IKo7haOF6pz5t5ICN1ArCqsNxbFGgb9zqh1IPgWb5";
-
+    private static Tweeter instance;
     private final TelegramBot bot;
 
     private final Twitter twitter;

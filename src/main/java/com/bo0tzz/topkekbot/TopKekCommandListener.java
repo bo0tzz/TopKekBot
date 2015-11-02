@@ -17,37 +17,34 @@ import java.util.function.Consumer;
 
 /**
  * Created by bo0tzz
+ * Enjoyed by stuntguy3000
  */
 public class TopKekCommandListener implements Listener {
 
-    private final TelegramBot bot;
-
-    private final Tweeter tweeter;
-
     private static final String[] OPTIONS_8BALL = {
-        "It is certain",
-        "It is decidedly so",
-        "Without a doubt",
-        "Yes definitely",
-        "You may rely on it",
-        "As I see it, yes",
-        "Most likely",
-        "Outlook good",
-        "Yes",
-        "Signs point to yes",
-        "Reply hazy try again",
-        "Ask again later",
-        "Better not tell you now",
-        "Cannot predict now",
-        "Concentrate and ask again",
-        "Don't count on it",
-        "My reply is no",
-        "My sources say no",
-        "Outlook not so good",
-        "Very doubtful"
+            "It is certain",
+            "It is decidedly so",
+            "Without a doubt",
+            "Yes definitely",
+            "You may rely on it",
+            "As I see it, yes",
+            "Most likely",
+            "Outlook good",
+            "Yes",
+            "Signs point to yes",
+            "Reply hazy try again",
+            "Ask again later",
+            "Better not tell you now",
+            "Cannot predict now",
+            "Concentrate and ask again",
+            "Don't count on it",
+            "My reply is no",
+            "My sources say no",
+            "Outlook not so good",
+            "Very doubtful"
     };
-
-
+    private final TelegramBot bot;
+    private final Tweeter tweeter;
     private final Map<String, Consumer<CommandMessageReceivedEvent>> commands;
 
     public TopKekCommandListener(TelegramBot bot, Tweeter tweeter) {
@@ -73,7 +70,8 @@ public class TopKekCommandListener implements Listener {
 
     @Override
     public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
-        this.commands.getOrDefault(event.getCommand(), (c) -> {}).accept(event);
+        this.commands.getOrDefault(event.getCommand(), (c) -> {
+        }).accept(event);
     }
 
     private void choice(CommandMessageReceivedEvent event) {
@@ -87,7 +85,7 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void define(CommandMessageReceivedEvent event) {
-        try  {
+        try {
             HttpResponse<String> response = Unirest.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=" + event.getArgsString().replace(" ", "+"))
                     .header("X-Mashape-Key", Util.KEY_URBAND)
                     .header("Accept", "text/plain")
@@ -111,8 +109,7 @@ public class TopKekCommandListener implements Listener {
 
     private void fuckingweather(CommandMessageReceivedEvent event) {
         try {
-            for (String message : Util.getWeather(event.getArgsString()))
-            {
+            for (String message : Util.getWeather(event.getArgsString())) {
                 event.getChat().sendMessage(SendableTextMessage.builder()
                         .message(message)
                         .replyTo(event.getMessage())
@@ -129,10 +126,13 @@ public class TopKekCommandListener implements Listener {
         event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build(), bot);
     }
 
-    @SuppressWarnings("deprecation")
     private void lmgtfy(CommandMessageReceivedEvent event) {
         String encoded = URLEncoder.encode(event.getArgsString());
-        event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build(), bot);
+        if (encoded.isEmpty()) {
+            event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build(), bot);
+        } else {
+            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build(), bot);
+        }
     }
 
     private void tweet(CommandMessageReceivedEvent event) {

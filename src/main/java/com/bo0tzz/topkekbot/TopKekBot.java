@@ -48,6 +48,6 @@ public class TopKekBot {
     }
 
     public void sendToMazen(String message) {
-       TelegramBot.getChat(-17349250).sendMessage(message, this.bot);
+        TelegramBot.getChat(-17349250).sendMessage(message, this.bot);
     }
 }
