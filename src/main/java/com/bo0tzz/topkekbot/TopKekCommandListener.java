@@ -130,6 +130,7 @@ public class TopKekCommandListener implements Listener {
         String encoded = URLEncoder.encode(event.getArgsString());
         if (encoded.isEmpty()) {
             event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build(), bot);
+            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/").build(), bot);
         } else {
             event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build(), bot);
         }
