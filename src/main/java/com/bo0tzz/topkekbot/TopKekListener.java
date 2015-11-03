@@ -3,6 +3,7 @@ package com.bo0tzz.topkekbot;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableAudioMessage;
+import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
@@ -42,6 +43,8 @@ public class TopKekListener implements Listener {
             event.getChat().sendMessage("no gf", bot);
         } else if (message.toLowerCase().contains("flickr.com/photos/stuntguy3000")) {
             event.getChat().sendMessage("Nobody likes your photos, Luke.", bot);
+        } else if (event.getMessage().getSender().getUsername().equals("zackpollard") && message.equals("*Sigh*")) {
+            event.getChat().sendMessage(SendableTextMessage.builder().message("Yes yes Zack, we get it. You're tired of our shit.").replyTo(event.getMessage()).build(), bot);
         }
     }
 }
