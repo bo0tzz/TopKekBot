@@ -79,7 +79,7 @@ public class TopKekCommandListener implements Listener {
         if (args.length <= 1) {
             event.getChat().sendMessage("Give me choices!", bot);
         } else {
-            String choice = args[ThreadLocalRandom.current().nextInt(args.length)];
+            String choice = args[ThreadLocalRandom.current().nextInt(args.length)].trim();
             event.getChat().sendMessage(SendableTextMessage.builder().message("I say " + choice).replyTo(event.getMessage()).build(), bot);
         }
     }
