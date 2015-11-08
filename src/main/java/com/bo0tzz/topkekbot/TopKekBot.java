@@ -1,8 +1,12 @@
 package com.bo0tzz.topkekbot;
 
+import org.apache.commons.io.FileUtils;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.Chat;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by bo0tzz
@@ -49,5 +53,15 @@ public class TopKekBot {
 
     public void sendToMazen(String message) {
         TelegramBot.getChat(-17349250).sendMessage(message, this.bot);
+    }
+
+    public static String getGoogleKey() {
+        try {
+            String key = FileUtils.readFileToString(new File("gkey"));
+            return key;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -1,8 +1,10 @@
 package com.bo0tzz.topkekbot;
 
 import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
@@ -65,6 +67,7 @@ public class TopKekCommandListener implements Listener {
             put("source", (event) -> event.getChat().sendMessage("The bot's source can be found over on https://github.com/bo0tzz/TopKekBot", bot));
             put("tweet", that::tweet);
             put("roll", that::roll);
+            put("lucky", that::lucky);
         }};
     }
 
@@ -175,5 +178,23 @@ public class TopKekCommandListener implements Listener {
                 event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
             }
         }).start();
+    }
+
+    private void lucky(CommandMessageReceivedEvent event) {
+        String url = "https://www.googleapis.com/customsearch/v1?key=" + TopKekBot.getGoogleKey() + "&cx=016322137100648159445:_tfnpvfyqok&q=";
+        HttpResponse<JsonNode> response = null;
+        try {
+            response = Unirest.get(url + event.getArgsString().replace(" ", "+"))
+                    .asJson();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        JSONArray array = response.getBody().getObject().getJSONArray("items");
+        if (array.length() == 0) {
+            event.getChat().sendMessage("No result found!", bot);
+            return;
+        }
+        String result = array.getJSONObject(0).getString("link");
+        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
     }
 }
