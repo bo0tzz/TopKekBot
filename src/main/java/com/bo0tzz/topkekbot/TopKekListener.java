@@ -45,6 +45,8 @@ public class TopKekListener implements Listener {
             event.getChat().sendMessage("Nobody likes your photos, Luke.", bot);
         } else if (event.getMessage().getSender().getUsername().equals("zackpollard") && (message.equals("*Sigh*") || message.equals("*Shrug*"))) {
             event.getChat().sendMessage(SendableTextMessage.builder().message("Yes yes Zack, we get it. You're tired of our shit.").replyTo(event.getMessage()).build(), bot);
+        } else if (message.toLowerCase().startsWith("@topkek_bot ")) {
+            event.getChat().sendMessage(message.substring(11), bot);
         }
     }
 }
