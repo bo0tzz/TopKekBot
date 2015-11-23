@@ -46,32 +46,17 @@ public class TopKekCommandListener implements Listener {
             "Very doubtful"
     };
     private static final String[] TINY_LETTERS = {
-            "ᵃ",
-            "ᵇ",
-            "ᶜ",
-            "ᵈ",
-            "ᵉ",
-            "ᶠ",
-            "ᵍ",
-            "ʰ",
-            "ⁱ",
-            "ʲ",
-            "ᵏ",
-            "ˡ",
-            "ᵐ",
-            "ⁿ",
-            "ᵒ",
-            "ᵖ",
-            "q",
-            "ʳ",
-            "ˢ",
-            "ᵗ",
-            "ᵘ",
-            "ᵛ",
-            "ʷ",
-            "ˣ",
-            "ʸ",
-            "ᶻ"
+            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ⁿ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
+            "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
+    };
+    private static final String[] BUBBLE_LETTERS = {
+            "Ⓐ ", "Ⓑ", "Ⓒ", "Ⓓ", "Ⓔ", "Ⓕ", "Ⓖ", "Ⓗ", "Ⓘ", "Ⓙ", "Ⓚ", "Ⓛ", "Ⓜ", "Ⓝ", "Ⓞ", "Ⓟ", "Ⓠ", "Ⓡ", "Ⓢ", "Ⓣ", "Ⓤ", "Ⓥ", "Ⓦ", "Ⓧ", "Ⓨ",
+            "Ⓩ", "ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ", "ⓠ", "ⓡ", "ⓢ", "ⓣ", "ⓤ", "ⓥ", "ⓦ", "ⓧ",
+            "ⓨ", "ⓩ"
+    };
+    private static final String[] UPSIDEDOWN_LETTERS = {
+            "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s",
+            "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
     };
     private final TelegramBot bot;
     private final Tweeter tweeter;
@@ -97,6 +82,8 @@ public class TopKekCommandListener implements Listener {
             put("roll", that::roll);
             put("lucky", that::lucky);
             put("tiny", that::tiny);
+            put("bubble", that::bubble);
+            put("upsidedown", that::upsidedown);
         }};
     }
 
@@ -233,6 +220,32 @@ public class TopKekCommandListener implements Listener {
             int index = ((int) c) - 97; //Character code "a" starts at 97
             if (index >= 0 && index <= 25) {
                 sb.append(TINY_LETTERS[index]);
+                continue;
+            }
+            sb.append(c);
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
+    }
+
+    private void bubble(CommandMessageReceivedEvent event) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+            int index = ((int) c) - 65; //Character code "A" starts at 65
+            if (index >= 0 && index <= 48) {
+                sb.append(BUBBLE_LETTERS[index]);
+                continue;
+            }
+            sb.append(c);
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
+    }
+
+    private void upsidedown(CommandMessageReceivedEvent event) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+            int index = ((int) c) - 97; //Character code "a" starts at 97
+            if (index >= 0 && index <= 25) {
+                sb.append(UPSIDEDOWN_LETTERS[index]);
                 continue;
             }
             sb.append(c);
