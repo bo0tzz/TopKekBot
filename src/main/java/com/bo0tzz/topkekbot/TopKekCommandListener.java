@@ -230,7 +230,12 @@ public class TopKekCommandListener implements Listener {
     private void tiny(CommandMessageReceivedEvent event) {
         StringBuilder sb = new StringBuilder();
         for (char c : event.getArgsString().toLowerCase().toCharArray()) {
-            sb.append(TINY_LETTERS[((int) c) - 97]); //Character code "a" starts at 97
+            int index = ((int) c) - 97; //Character code "a" starts at 97
+            if (index >= 0 && index <= 25) {
+                sb.append(TINY_LETTERS[index]);
+                continue;
+            }
+            sb.append(c);
         }
         event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
     }
