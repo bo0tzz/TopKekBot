@@ -83,6 +83,7 @@ public class TopKekCommandListener implements Listener {
             put("lucky", that::lucky);
             put("tiny", that::tiny);
             put("bubble", that::bubble);
+            put("upsidedown", that::upsidedown);
         }};
     }
 
