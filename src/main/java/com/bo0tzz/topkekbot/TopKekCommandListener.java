@@ -229,9 +229,9 @@ public class TopKekCommandListener implements Listener {
 
     private void bubble(CommandMessageReceivedEvent event) {
         StringBuilder sb = new StringBuilder();
-        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+        for (char c : event.getArgsString().toCharArray()) {
             int index = ((int) c) - 65; //Character code "A" starts at 65
-            if (index >= 0 && index <= 54) {
+            if (index >= 0 && index <= 57) {
                 sb.append(BUBBLE_LETTERS[index]);
                 continue;
             }
