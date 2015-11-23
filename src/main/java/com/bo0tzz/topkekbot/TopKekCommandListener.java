@@ -51,8 +51,8 @@ public class TopKekCommandListener implements Listener {
     };
     private static final String[] BUBBLE_LETTERS = {
             "Ⓐ ", "Ⓑ", "Ⓒ", "Ⓓ", "Ⓔ", "Ⓕ", "Ⓖ", "Ⓗ", "Ⓘ", "Ⓙ", "Ⓚ", "Ⓛ", "Ⓜ", "Ⓝ", "Ⓞ", "Ⓟ", "Ⓠ", "Ⓡ", "Ⓢ", "Ⓣ", "Ⓤ", "Ⓥ", "Ⓦ", "Ⓧ", "Ⓨ",
-            "Ⓩ", "ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ", "ⓠ", "ⓡ", "ⓢ", "ⓣ", "ⓤ", "ⓥ", "ⓦ", "ⓧ",
-            "ⓨ", "ⓩ"
+            "Ⓩ", "[", "\\", "]", "^", "_", "`", "ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ",
+            "ⓠ", "ⓡ", "ⓢ", "ⓣ", "ⓤ", "ⓥ", "ⓦ", "ⓧ", "ⓨ", "ⓩ"
     };
     private static final String[] UPSIDEDOWN_LETTERS = {
             "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s",
@@ -231,7 +231,7 @@ public class TopKekCommandListener implements Listener {
         StringBuilder sb = new StringBuilder();
         for (char c : event.getArgsString().toLowerCase().toCharArray()) {
             int index = ((int) c) - 65; //Character code "A" starts at 65
-            if (index >= 0 && index <= 48) {
+            if (index >= 0 && index <= 54) {
                 sb.append(BUBBLE_LETTERS[index]);
                 continue;
             }
