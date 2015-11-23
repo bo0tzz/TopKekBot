@@ -45,6 +45,34 @@ public class TopKekCommandListener implements Listener {
             "Outlook not so good",
             "Very doubtful"
     };
+    private static final String[] TINY_LETTERS = {
+            "ᵃ",
+            "ᵇ",
+            "ᶜ",
+            "ᵈ",
+            "ᵉ",
+            "ᶠ",
+            "ᵍ",
+            "ʰ",
+            "ⁱ",
+            "ʲ",
+            "ᵏ",
+            "ˡ",
+            "ᵐ",
+            "ⁿ",
+            "ᵒ",
+            "ᵖ",
+            "q",
+            "ʳ",
+            "ˢ",
+            "ᵗ",
+            "ᵘ",
+            "ᵛ",
+            "ʷ",
+            "ˣ",
+            "ʸ",
+            "ᶻ"
+    };
     private final TelegramBot bot;
     private final Tweeter tweeter;
     private final Map<String, Consumer<CommandMessageReceivedEvent>> commands;
@@ -68,6 +96,7 @@ public class TopKekCommandListener implements Listener {
             put("tweet", that::tweet);
             put("roll", that::roll);
             put("lucky", that::lucky);
+            put("tiny", that::tiny);
         }};
     }
 
@@ -196,5 +225,13 @@ public class TopKekCommandListener implements Listener {
         }
         String result = array.getJSONObject(0).getString("link");
         event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
+    }
+
+    private void tiny(CommandMessageReceivedEvent event) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+            sb.append(TINY_LETTERS[((int) c) - 97]);
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
     }
 }
