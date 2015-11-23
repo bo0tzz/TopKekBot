@@ -46,7 +46,7 @@ public class TopKekCommandListener implements Listener {
             "Very doubtful"
     };
     private static final String[] TINY_LETTERS = {
-            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ⁿ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
+            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ᶰ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
             "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
     };
     private static final String[] BUBBLE_LETTERS = {
