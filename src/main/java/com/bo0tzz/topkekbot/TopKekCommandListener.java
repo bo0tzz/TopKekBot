@@ -353,7 +353,7 @@ public class TopKekCommandListener implements Listener {
     }
     
     private void whatWouldMazenSay(CommandMessageReceivedEvent event) {
-        int chosen = ThreadLocalRandom.current().nextInt(options.length);
+        int chosen = ThreadLocalRandom.current().nextInt(WHATWOULDMAZENSAY.length);
         event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen], bot);
     }
 }
