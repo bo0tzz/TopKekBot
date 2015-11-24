@@ -7,6 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.zackpollard.telegrambot.api.TelegramBot;
+import pro.zackpollard.telegrambot.api.chat.message.send.ParseMode;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.CommandMessageReceivedEvent;
@@ -128,6 +129,10 @@ public class TopKekCommandListener implements Listener {
             "What is grosser than ten dead babies nailed to a tree?\nOne dead baby nailed to ten trees.",
             "What is the worst part about killing a baby?\nGetting blood on your clown suit."
     };
+
+    private static final SendableTextMessage topKek = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
+    private static final SendableTextMessage source = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
+
     private final TelegramBot bot;
     private final Tweeter tweeter;
     private final Map<String, Consumer<CommandMessageReceivedEvent>> commands;
@@ -145,9 +150,9 @@ public class TopKekCommandListener implements Listener {
             put("lenny", (event) -> event.getChat().sendMessage("( ͡° ͜ʖ ͡°)", bot));
             put("idk", (event) -> event.getChat().sendMessage("¯\\_(ツ)_/¯", bot));
             put("flip", (event) -> event.getChat().sendMessage("(╯°□°）╯︵ ┻━┻", bot));
-            put("topkek", (event) -> event.getChat().sendMessage("http://s.mzn.pw/index.swf Gotta be safe while keking!", bot));
+            put("topkek", (event) -> event.getChat().sendMessage(topKek, bot));
             put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o", bot));
-            put("source", (event) -> event.getChat().sendMessage("The bot's source can be found over on https://github.com/bo0tzz/TopKekBot", bot));
+            put("source", (event) -> event.getChat().sendMessage(source, bot));
             put("tweet", that::tweet);
             put("roll", that::roll);
             put("lucky", that::lucky);
