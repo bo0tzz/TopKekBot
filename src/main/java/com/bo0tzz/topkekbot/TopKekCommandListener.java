@@ -130,8 +130,8 @@ public class TopKekCommandListener implements Listener {
             "What is the worst part about killing a baby?\nGetting blood on your clown suit."
     };
 
-    private static final SendableTextMessage topKek = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
-    private static final SendableTextMessage source = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
+    private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
+    private static final SendableTextMessage SOURCE = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
 
     private final TelegramBot bot;
     private final Tweeter tweeter;
@@ -150,9 +150,9 @@ public class TopKekCommandListener implements Listener {
             put("lenny", (event) -> event.getChat().sendMessage("( ͡° ͜ʖ ͡°)", bot));
             put("idk", (event) -> event.getChat().sendMessage("¯\\_(ツ)_/¯", bot));
             put("flip", (event) -> event.getChat().sendMessage("(╯°□°）╯︵ ┻━┻", bot));
-            put("topkek", (event) -> event.getChat().sendMessage(topKek, bot));
+            put("topkek", (event) -> event.getChat().sendMessage(TOPKEK, bot));
             put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o", bot));
-            put("source", (event) -> event.getChat().sendMessage(source, bot));
+            put("source", (event) -> event.getChat().sendMessage(SOURCE, bot));
             put("tweet", that::tweet);
             put("roll", that::roll);
             put("lucky", that::lucky);
