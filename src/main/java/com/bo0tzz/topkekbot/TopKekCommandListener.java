@@ -312,8 +312,9 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void upsidedown(CommandMessageReceivedEvent event) {
+        String in = new StringBuilder(event.getArgsString().toLowerCase()).reverse().toString();
         StringBuilder sb = new StringBuilder();
-        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+        for (char c : in.toCharArray()) {
             int index = ((int) c) - 97; //Character code "a" starts at 97
             if (index >= 0 && index <= 25) {
                 sb.append(UPSIDEDOWN_LETTERS[index]);
