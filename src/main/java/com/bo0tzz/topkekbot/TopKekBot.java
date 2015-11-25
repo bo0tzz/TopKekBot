@@ -7,6 +7,8 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by bo0tzz
@@ -14,11 +16,15 @@ import java.io.IOException;
 public class TopKekBot {
 
     private final TelegramBot bot;
+    private final Map<Integer, String> lastCommand;
 
     private final Tweeter twitter;
+    private static TopKekBot instance;
 
     private TopKekBot(String authToken) {
+        instance = this;
         this.bot = TelegramBot.login(authToken);
+        this.lastCommand = new HashMap<>();
         System.out.println("Bot logged in: " + this.bot.toString());
         this.twitter = Tweeter.getInstance(this.bot);
         System.out.println("Twitter API initialised");
@@ -53,6 +59,16 @@ public class TopKekBot {
 
     public void sendToMazen(String message) {
         TelegramBot.getChat(-17349250).sendMessage(message, this.bot);
+    }
+
+    public Map<Integer, String> getLastCommand() {
+
+        return lastCommand;
+    }
+
+    public static TopKekBot getInstance() {
+
+        return instance;
     }
 
     public static String getGoogleKey() {

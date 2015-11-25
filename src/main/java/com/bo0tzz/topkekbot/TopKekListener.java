@@ -40,6 +40,17 @@ public class TopKekListener implements Listener {
         } else if (message.equals("fish go moo")) {
             event.getChat().sendMessage("@TopKek_Bot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.", bot);
         } else if (message.equals("tfw")) {
+            String reply = "no ";
+            String lastCommand = TopKekBot.getInstance().getLastCommand().get(event.getMessage().getSender().getId());
+            if(lastCommand != null) {
+                if(lastCommand.equals("getgif")) {
+                    reply += "gif";
+                } else {
+                    reply += "gf";
+                }
+            } else {
+                reply += "gf";
+            }
             event.getChat().sendMessage("no gf", bot);
         } else if (message.toLowerCase().contains("flickr.com/photos/stuntguy3000")) {
             event.getChat().sendMessage("Nobody likes your photos, Luke.", bot);
