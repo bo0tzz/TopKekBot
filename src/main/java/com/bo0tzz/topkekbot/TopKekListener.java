@@ -51,7 +51,7 @@ public class TopKekListener implements Listener {
             } else {
                 reply += "gf";
             }
-            event.getChat().sendMessage("no gf", bot);
+            event.getChat().sendMessage(reply, bot);
         } else if (message.toLowerCase().contains("flickr.com/photos/stuntguy3000")) {
             event.getChat().sendMessage("Nobody likes your photos, Luke.", bot);
         } else if (event.getMessage().getSender().getUsername().equals("zackpollard") && (message.equals("*Sigh*") || message.equals("*Shrug*"))) {
