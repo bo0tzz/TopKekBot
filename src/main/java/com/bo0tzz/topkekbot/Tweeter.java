@@ -7,6 +7,8 @@ import twitter4j.*;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by bo0tzz
  */
@@ -16,12 +18,13 @@ public class Tweeter {
     public static final String TWITTER_CONSUMER_SECRET = "T8f2mLGP4RnejFUHumkCHBRqhcfGORDfPM2AjWGts7ulpyVRdh";
     public static final String TWITTER_ACCESS_TOKEN = "3761163975-y8kkpPdGmMQx1sH8tMaTXoGIQSeghpj3sM4SH7r";
     public static final String TWITTER_ACCESS_SECRET = "kke6IKo7haOF6pz5t5ICN1ArCqsNxbFGgb9zqh1IPgWb5";
+
     private static Tweeter instance;
     private final TelegramBot bot;
-
     private final Twitter twitter;
-
     private final Configuration config;
+
+    private ResponseList<Status> speakwords;
 
     private Tweeter(TelegramBot bot) {
         this.bot = bot;
@@ -33,6 +36,11 @@ public class Tweeter {
                 .setOAuthAccessTokenSecret(TWITTER_ACCESS_SECRET)
                 .build();
         this.twitter = new TwitterFactory(config).getInstance();
+        try {
+            speakwords = twitter.getUserTimeline("DutchSpeakwords");
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
         createListener();
     }
 
@@ -45,6 +53,14 @@ public class Tweeter {
             }
         }
         return instance;
+    }
+
+    public String getSpeakword() {
+        if (speakwords == null) {
+            return "Something went wrong!";
+        }
+        Status response = speakwords.get(ThreadLocalRandom.current().nextInt(speakwords.size()));
+        return response.getText();
     }
 
     public void sendTweet(String content) {

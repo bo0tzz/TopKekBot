@@ -177,6 +177,7 @@ public class TopKekCommandListener implements Listener {
             put("upsidedown", that::upsidedown);
             put("deadbaby", that::deadBabyJoke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
+            put("speakwords", that::speakwords);
         }};
     }
 
@@ -356,5 +357,9 @@ public class TopKekCommandListener implements Listener {
     private void whatWouldMazenSay(CommandMessageReceivedEvent event) {
         int chosen = ThreadLocalRandom.current().nextInt(WHATWOULDMAZENSAY.length);
         event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen], bot);
+    }
+
+    private void speakwords(CommandMessageReceivedEvent event) {
+        event.getChat().sendMessage(tweeter.getSpeakword(), bot);
     }
 }
