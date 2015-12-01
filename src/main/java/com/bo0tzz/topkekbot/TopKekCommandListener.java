@@ -144,7 +144,9 @@ public class TopKekCommandListener implements Listener {
         "One of the main reasons I started developing apps was to help people what they want to do like decorate a christmas tree.",
         "I really like to crochet.",
         "I made a good website http://slgonzalez.com/",
-        "If that was my sister I'd eat her."
+        "If that was my sister I'd eat her.",
+        "https://s.mzn.pw/08bG9Ti.png",
+        "ISIS more like waswas"
     };
 
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
