@@ -186,7 +186,7 @@ public class TopKekCommandListener implements Listener {
             put("deadbaby", that::deadBabyJoke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
             put("speakwords", that::speakwords);
-            put("youtube", that::speakwords);
+            put("youtube", that::youtube);
         }};
     }
 
