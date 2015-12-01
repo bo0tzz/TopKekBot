@@ -143,7 +143,8 @@ public class TopKekCommandListener implements Listener {
         "Sometimes when I go to sleep I'm stuck with that annoying bug I cannot fix, and in my dreams I see myself programming. \nWhen I wake up I have the solution!",
         "One of the main reasons I started developing apps was to help people what they want to do like decorate a christmas tree.",
         "I really like to crochet.",
-        "I made a good website http://slgonzalez.com/"
+        "I made a good website http://slgonzalez.com/",
+        "If that was my sister I'd eat her."
     };
 
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
