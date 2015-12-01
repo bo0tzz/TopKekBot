@@ -140,10 +140,18 @@ public class TopKekCommandListener implements Listener {
         "Dr. Bakos: I often have this disease which I call long line-itus.",
         "Dr. Bakos: Are you eager enough just to write down a slump of code, or is the code itself a artistic medium?",
         "Beautiful code is short and concise.",
+        "When you're around a certain race enough, you tend to become like them physically and mentally; soon enough I'll be driving terribly and doing math competitions",
         "Sometimes when I go to sleep I'm stuck with that annoying bug I cannot fix, and in my dreams I see myself programming. \nWhen I wake up I have the solution!",
         "One of the main reasons I started developing apps was to help people what they want to do like decorate a christmas tree.",
         "I really like to crochet.",
-        "I made a good website http://slgonzalez.com/"
+        "I made a good website http://slgonzalez.com/",
+        "If that was my sister I'd eat her.",
+        "https://s.mzn.pw/08bG9Ti.png",
+        "ISIS more like waswas",
+        "eat less food habibi @aaomidi",
+        "Are aero bars forming in my ears?",
+        "Less halawa more carrot @aaomidi",
+        "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia"
     };
 
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
