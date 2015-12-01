@@ -178,6 +178,7 @@ public class TopKekCommandListener implements Listener {
             put("deadbaby", that::deadBabyJoke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
             put("speakwords", that::speakwords);
+            put("youtube", that::speakwords);
         }};
     }
 
@@ -292,20 +293,11 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void lucky(CommandMessageReceivedEvent event) {
-        String url = "https://www.googleapis.com/customsearch/v1?key=" + TopKekBot.getGoogleKey() + "&cx=016322137100648159445:_tfnpvfyqok&q=";
-        HttpResponse<JsonNode> response = null;
-        try {
-            response = Unirest.get(url + event.getArgsString().replace(" ", "+"))
-                    .asJson();
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        JSONArray array = response.getBody().getObject().getJSONArray("items");
-        if (array.length() == 0) {
+        String result = Util.searchGoogle(event.getArgsString());
+        if (result == null) {
             event.getChat().sendMessage("No result found!", bot);
             return;
         }
-        String result = array.getJSONObject(0).getString("link");
         event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
     }
 
@@ -361,5 +353,14 @@ public class TopKekCommandListener implements Listener {
 
     private void speakwords(CommandMessageReceivedEvent event) {
         event.getChat().sendMessage(tweeter.getSpeakword(), bot);
+    }
+
+    private void youtube(CommandMessageReceivedEvent event) {
+        String result = Util.searchYoutube(event.getArgsString());
+        if (result == null) {
+            event.getChat().sendMessage("No result found!", bot);
+            return;
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
     }
 }

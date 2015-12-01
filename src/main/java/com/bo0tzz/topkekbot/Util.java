@@ -1,5 +1,10 @@
 package com.bo0tzz.topkekbot;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,5 +69,39 @@ public class Util {
         in.close();
 
         return response.toString().trim();
+    }
+
+    public static String searchGoogle(String query) {
+        String url = "https://www.googleapis.com/customsearch/v1?key=" + TopKekBot.getGoogleKey() + "&cx=016322137100648159445:_tfnpvfyqok&q=";
+        HttpResponse<JsonNode> response = null;
+        try {
+            response = Unirest.get(url + query.replace(" ", "+"))
+                    .asJson();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        JSONArray array = response.getBody().getObject().getJSONArray("items");
+        if (array.length() == 0) {
+            return null;
+        }
+        String result = array.getJSONObject(0).getString("link");
+        return result;
+    }
+
+    public static String searchYoutube(String query) {
+        String url = "https://www.googleapis.com/customsearch/v1?key=" + TopKekBot.getGoogleKey() + "&cx=016322137100648159445:79vkodvfzoq&q=";
+        HttpResponse<JsonNode> response = null;
+        try {
+            response = Unirest.get(url + query.replace(" ", "+"))
+                    .asJson();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        JSONArray array = response.getBody().getObject().getJSONArray("items");
+        if (array.length() == 0) {
+            return null;
+        }
+        String result = array.getJSONObject(0).getString("link");
+        return result;
     }
 }
