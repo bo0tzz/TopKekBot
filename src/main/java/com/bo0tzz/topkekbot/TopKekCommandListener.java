@@ -147,6 +147,7 @@ public class TopKekCommandListener implements Listener {
         "I made a good website http://slgonzalez.com/",
         "If that was my sister I'd eat her.",
         "https://s.mzn.pw/08bG9Ti.png",
+        "http://i.imgur.com/9gweTJV.png",
         "ISIS more like waswas",
         "eat less food habibi @aaomidi",
         "Are aero bars forming in my ears?",
