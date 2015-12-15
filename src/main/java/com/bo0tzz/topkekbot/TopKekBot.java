@@ -46,7 +46,7 @@ public class TopKekBot {
         this.bot.startUpdates(false);
         System.out.println("Updates started.");
 
-        Chat mazenchat = TelegramBot.getChat(-17349250);
+        Chat mazenchat = TelegramBot.getChat(-1001000055116L);
         while (true) {
             String in = System.console().readLine();
             if ("quit".equals(in)) {
