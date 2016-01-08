@@ -58,7 +58,7 @@ public class TopKekBot {
     }
 
     public void sendToMazen(String message) {
-        TelegramBot.getChat(-17349250).sendMessage(message, this.bot);
+        TelegramBot.getChat(-1001000055116L).sendMessage(message, this.bot);
     }
 
     public Map<Integer, String> getLastCommand() {
