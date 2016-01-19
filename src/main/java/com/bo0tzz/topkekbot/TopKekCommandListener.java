@@ -195,7 +195,7 @@ public class TopKekCommandListener implements Listener {
     @Override
     public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
         TopKekBot.getInstance().getLastCommand().put(event.getMessage().getSender().getId(), event.getCommand());
-        this.commands.getOrDefault(event.getCommand(), (c) -> {
+        this.commands.getOrDefault(event.getCommand().toLowerCase(), (c) -> {
         }).accept(event);
     }
 
