@@ -211,6 +211,10 @@ public class TopKekCommandListener implements Listener {
 
     private void define(CommandMessageReceivedEvent event) {
         try {
+            if (event.getArgsString().equalsIgnoreCase("mazen")) {
+                event.getChat().sendMessage("Definition of mazen: Some asshat who thinks he's the best.", bot);
+                return;
+            }
             HttpResponse<String> response = Unirest.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=" + event.getArgsString().replace(" ", "+"))
                     .header("X-Mashape-Key", Util.KEY_URBAND)
                     .header("Accept", "text/plain")
