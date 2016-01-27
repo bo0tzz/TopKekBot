@@ -127,7 +127,8 @@ public class TopKekCommandListener implements Listener {
             "What is red and pink and hanging out of your dog's mouth?\nYour baby's leg.",
             "What present do you get for a dead baby?\nA dead puppy.",
             "What is grosser than ten dead babies nailed to a tree?\nOne dead baby nailed to ten trees.",
-            "What is the worst part about killing a baby?\nGetting blood on your clown suit."
+            "What is the worst part about killing a baby?\nGetting blood on your clown suit.",
+            "What's harder than nailing a dead baby to a tree?\nMy dick while doing it."
     };
     
     private static final String[] WHATWOULDMAZENSAY = new String[]{
