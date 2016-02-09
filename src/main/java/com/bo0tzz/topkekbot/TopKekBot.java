@@ -16,7 +16,7 @@ import java.util.Map;
 public class TopKekBot {
 
     private final TelegramBot bot;
-    private final Map<Integer, String> lastCommand;
+    private final Map<Long, String> lastCommand;
 
     private final Tweeter twitter;
     private static TopKekBot instance;
@@ -61,7 +61,7 @@ public class TopKekBot {
         TelegramBot.getChat(-1001000055116L).sendMessage(message, this.bot);
     }
 
-    public Map<Integer, String> getLastCommand() {
+    public Map<Long, String> getLastCommand() {
 
         return lastCommand;
     }
