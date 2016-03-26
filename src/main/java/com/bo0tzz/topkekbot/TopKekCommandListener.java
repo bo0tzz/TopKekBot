@@ -1,10 +1,8 @@
 package com.bo0tzz.topkekbot;
 
 import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.ParseMode;
@@ -22,43 +20,14 @@ import java.util.function.Consumer;
 /**
  * Created by bo0tzz
  * Enjoyed by stuntguy3000
+ * Delighted by Mazen
  */
 public class TopKekCommandListener implements Listener {
 
-    private static final String[] OPTIONS_8BALL = {
-            "It is certain",
-            "It is decidedly so",
-            "Without a doubt",
-            "Yes definitely",
-            "You may rely on it",
-            "As I see it, yes",
-            "Most likely",
-            "Outlook good",
-            "Yes",
-            "Signs point to yes",
-            "Reply hazy try again",
-            "Ask again later",
-            "Better not tell you now",
-            "Cannot predict now",
-            "Concentrate and ask again",
-            "Don't count on it",
-            "My reply is no",
-            "My sources say no",
-            "Outlook not so good",
-            "Very doubtful"
-    };
-    private static final String[] TINY_LETTERS = {
-            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ᶰ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
-            "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
-    };
     private static final String[] BUBBLE_LETTERS = {
             "Ⓐ ", "Ⓑ", "Ⓒ", "Ⓓ", "Ⓔ", "Ⓕ", "Ⓖ", "Ⓗ", "Ⓘ", "Ⓙ", "Ⓚ", "Ⓛ", "Ⓜ", "Ⓝ", "Ⓞ", "Ⓟ", "Ⓠ", "Ⓡ", "Ⓢ", "Ⓣ", "Ⓤ", "Ⓥ", "Ⓦ", "Ⓧ", "Ⓨ",
             "Ⓩ", "[", "\\", "]", "^", "_", "`", "ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ",
             "ⓠ", "ⓡ", "ⓢ", "ⓣ", "ⓤ", "ⓥ", "ⓦ", "ⓧ", "ⓨ", "ⓩ"
-    };
-    private static final String[] UPSIDEDOWN_LETTERS = {
-            "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s",
-            "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
     };
     private static final String[] DEADBABY_JOKES = {
             "What is funnier than a dead baby?\nA dead baby in a clown costume.",
@@ -130,7 +99,53 @@ public class TopKekCommandListener implements Listener {
             "What is the worst part about killing a baby?\nGetting blood on your clown suit.",
             "What's harder than nailing a dead baby to a tree?\nMy dick while doing it."
     };
-    
+    private static final String[] JOKES = new String[]{
+            "Why does Japan have no feminists?\nBecause they hunt whales.",
+            "A leaf and an emo fall from the tree. Who hits the ground first?\nThe leaf. The rope stopped the emo.",
+            "What is a prdophiles favourite part about Halloween?\nFree Delivery",
+            "How can you tell if your wife is dead?\nThe sex is the same but the dishes start piling up.",
+            "When my Girlfriend got pregnant, everything changed.\nMy Name, My Address, My Phone Number.",
+            "What’s the difference between feminists & Hockey Players?\nHockey Players shower after three periods.",
+            "What does the highest WNBA player make?\nSandwiches.",
+            "Whats 18 inches long and hangs infront of an asshole?\nDonald Trump’s Tie",
+            "What do you do if your lawn mower stops working?\nDeport him back to mexico.",
+            "How are an alcoholic and a necrophiliac alike?\nThey both like to crack open a cold one.",
+            "What do you call a child with a gun?\nMohammed.",
+            "My first time having sex was a lot like my first football game. I was beaten and bloodied, but at least my dad came.",
+            "What is the definition of fun?\nPlaying fetch with a pitbull and a baby."
+    };
+    private static final String[] OPTIONS_8BALL = {
+            "It is certain",
+            "It is decidedly so",
+            "Without a doubt",
+            "Yes definitely",
+            "You may rely on it",
+            "As I see it, yes",
+            "Most likely",
+            "Outlook good",
+            "Yes",
+            "Signs point to yes",
+            "Reply hazy try again",
+            "Ask again later",
+            "Better not tell you now",
+            "Cannot predict now",
+            "Concentrate and ask again",
+            "Don't count on it",
+            "My reply is no",
+            "My sources say no",
+            "Outlook not so good",
+            "Very doubtful"
+    };
+    private static final SendableTextMessage SOURCE = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
+    private static final String[] TINY_LETTERS = {
+            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ᶰ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
+            "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
+    };
+    private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
+    private static final String[] UPSIDEDOWN_LETTERS = {
+            "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s",
+            "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
+    };
     private static final String[] WHATWOULDMAZENSAY = new String[]{
         "No, I'm not interested in having a girlfriend I find it a tremendous waste of time.",
         "Hi, my name is Santiago Gonzalez and I'm 14 and I like to program.",
@@ -156,13 +171,9 @@ public class TopKekCommandListener implements Listener {
         "Less halawa more carrot aaomidi",
         "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia"
     };
-
-    private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
-    private static final SendableTextMessage SOURCE = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
-
     private final TelegramBot bot;
-    private final Tweeter tweeter;
     private final Map<String, Consumer<CommandMessageReceivedEvent>> commands;
+    private final Tweeter tweeter;
 
     public TopKekCommandListener(TelegramBot bot, Tweeter tweeter) {
         this.bot = bot;
@@ -187,17 +198,24 @@ public class TopKekCommandListener implements Listener {
             put("bubble", that::bubble);
             put("upsidedown", that::upsidedown);
             put("deadbaby", that::deadBabyJoke);
+            put("joke", that::joke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
             put("speakwords", that::speakwords);
             put("youtube", that::youtube);
         }};
     }
 
-    @Override
-    public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
-        TopKekBot.getInstance().getLastCommand().put(event.getMessage().getSender().getId(), event.getCommand());
-        this.commands.getOrDefault(event.getCommand().toLowerCase(), (c) -> {
-        }).accept(event);
+    private void bubble(CommandMessageReceivedEvent event) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : event.getArgsString().toCharArray()) {
+            int index = ((int) c) - 65; //Character code "A" starts at 65
+            if (index >= 0 && index <= 57) {
+                sb.append(BUBBLE_LETTERS[index]);
+                continue;
+            }
+            sb.append(c);
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
     }
 
     private void choice(CommandMessageReceivedEvent event) {
@@ -208,6 +226,11 @@ public class TopKekCommandListener implements Listener {
             String choice = args[ThreadLocalRandom.current().nextInt(args.length)].trim();
             event.getChat().sendMessage(SendableTextMessage.builder().message("I say " + choice).replyTo(event.getMessage()).build(), bot);
         }
+    }
+
+    private void deadBabyJoke(CommandMessageReceivedEvent event) {
+        Random random = new Random();
+        event.getChat().sendMessage(SendableTextMessage.builder().message(DEADBABY_JOKES[random.nextInt(DEADBABY_JOKES.length - 1)]).build(), bot);
     }
 
     private void define(CommandMessageReceivedEvent event) {
@@ -237,6 +260,11 @@ public class TopKekCommandListener implements Listener {
         }
     }
 
+    private void eightball(CommandMessageReceivedEvent event) {
+        int chosen = ThreadLocalRandom.current().nextInt(OPTIONS_8BALL.length);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build(), bot);
+    }
+
     private void fuckingweather(CommandMessageReceivedEvent event) {
         try {
             for (String message : Util.getWeather(event.getArgsString())) {
@@ -251,9 +279,9 @@ public class TopKekCommandListener implements Listener {
         }
     }
 
-    private void eightball(CommandMessageReceivedEvent event) {
-        int chosen = ThreadLocalRandom.current().nextInt(OPTIONS_8BALL.length);
-        event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build(), bot);
+    private void joke(CommandMessageReceivedEvent event) {
+        Random random = new Random();
+        event.getChat().sendMessage(SendableTextMessage.builder().message(JOKES[random.nextInt(JOKES.length - 1)]).build(), bot);
     }
 
     private void lmgtfy(CommandMessageReceivedEvent event) {
@@ -266,15 +294,20 @@ public class TopKekCommandListener implements Listener {
         }
     }
 
-    private void tweet(CommandMessageReceivedEvent event) {
-        String tweet;
-        if (event.getMessage().getSender().getUsername().equals("bo0tzz")) {
-            tweet = event.getArgsString();
-        } else {
-            tweet = event.getMessage().getSender().getUsername() + " says: " + event.getArgsString();
+    private void lucky(CommandMessageReceivedEvent event) {
+        String result = Util.searchGoogle(event.getArgsString());
+        if (result == null) {
+            event.getChat().sendMessage("No result found!", bot);
+            return;
         }
-        System.out.println(("Tweeting: " + tweet));
-        this.tweeter.sendTweet(tweet);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
+    }
+
+    @Override
+    public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
+        TopKekBot.getInstance().getLastCommand().put(event.getMessage().getSender().getId(), event.getCommand());
+        this.commands.getOrDefault(event.getCommand().toLowerCase(), (c) -> {
+        }).accept(event);
     }
 
     private void roll(CommandMessageReceivedEvent event) {
@@ -307,13 +340,8 @@ public class TopKekCommandListener implements Listener {
         }).start();
     }
 
-    private void lucky(CommandMessageReceivedEvent event) {
-        String result = Util.searchGoogle(event.getArgsString());
-        if (result == null) {
-            event.getChat().sendMessage("No result found!", bot);
-            return;
-        }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
+    private void speakwords(CommandMessageReceivedEvent event) {
+        event.getChat().sendMessage(tweeter.getSpeakword(), bot);
     }
 
     private void tiny(CommandMessageReceivedEvent event) {
@@ -329,17 +357,15 @@ public class TopKekCommandListener implements Listener {
         event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
     }
 
-    private void bubble(CommandMessageReceivedEvent event) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : event.getArgsString().toCharArray()) {
-            int index = ((int) c) - 65; //Character code "A" starts at 65
-            if (index >= 0 && index <= 57) {
-                sb.append(BUBBLE_LETTERS[index]);
-                continue;
-            }
-            sb.append(c);
+    private void tweet(CommandMessageReceivedEvent event) {
+        String tweet;
+        if (event.getMessage().getSender().getUsername().equals("bo0tzz")) {
+            tweet = event.getArgsString();
+        } else {
+            tweet = event.getMessage().getSender().getUsername() + " says: " + event.getArgsString();
         }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
+        System.out.println(("Tweeting: " + tweet));
+        this.tweeter.sendTweet(tweet);
     }
 
     private void upsidedown(CommandMessageReceivedEvent event) {
@@ -356,18 +382,9 @@ public class TopKekCommandListener implements Listener {
         event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
     }
 
-    private void deadBabyJoke(CommandMessageReceivedEvent event) {
-        Random random = new Random();
-        event.getChat().sendMessage(SendableTextMessage.builder().message(DEADBABY_JOKES[random.nextInt(DEADBABY_JOKES.length - 1)]).build(), bot);
-    }
-    
     private void whatWouldMazenSay(CommandMessageReceivedEvent event) {
         int chosen = ThreadLocalRandom.current().nextInt(WHATWOULDMAZENSAY.length);
         event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen], bot);
-    }
-
-    private void speakwords(CommandMessageReceivedEvent event) {
-        event.getChat().sendMessage(tweeter.getSpeakword(), bot);
     }
 
     private void youtube(CommandMessageReceivedEvent event) {
