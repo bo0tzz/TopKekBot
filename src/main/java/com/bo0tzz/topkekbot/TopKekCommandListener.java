@@ -127,7 +127,8 @@ public class TopKekCommandListener implements Listener {
             "What is red and pink and hanging out of your dog's mouth?\nYour baby's leg.",
             "What present do you get for a dead baby?\nA dead puppy.",
             "What is grosser than ten dead babies nailed to a tree?\nOne dead baby nailed to ten trees.",
-            "What is the worst part about killing a baby?\nGetting blood on your clown suit."
+            "What is the worst part about killing a baby?\nGetting blood on your clown suit.",
+            "What's harder than nailing a dead baby to a tree?\nMy dick while doing it."
     };
     
     private static final String[] WHATWOULDMAZENSAY = new String[]{
@@ -147,11 +148,12 @@ public class TopKekCommandListener implements Listener {
         "I made a good website http://slgonzalez.com/",
         "If that was my sister I'd eat her.",
         "https://s.mzn.pw/08bG9Ti.png",
+        "http://i.imgur.com/9gweTJV.png",
         "ISIS more like waswas",
         "eat less food habibi @aaomidi",
         "Are aero bars forming in my ears?",
         "I was walking down the halls and into my next class playing \"In Da Club\" by 50 cent on full volume with my laptop on one hand",
-        "Less halawa more carrot @aaomidi",
+        "Less halawa more carrot aaomidi",
         "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia"
     };
 
@@ -194,7 +196,7 @@ public class TopKekCommandListener implements Listener {
     @Override
     public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
         TopKekBot.getInstance().getLastCommand().put(event.getMessage().getSender().getId(), event.getCommand());
-        this.commands.getOrDefault(event.getCommand(), (c) -> {
+        this.commands.getOrDefault(event.getCommand().toLowerCase(), (c) -> {
         }).accept(event);
     }
 
@@ -210,6 +212,10 @@ public class TopKekCommandListener implements Listener {
 
     private void define(CommandMessageReceivedEvent event) {
         try {
+            if (event.getArgsString().equalsIgnoreCase("mazen")) {
+                event.getChat().sendMessage("Definition of mazen: Some asshat who thinks he's the best.", bot);
+                return;
+            }
             HttpResponse<String> response = Unirest.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=" + event.getArgsString().replace(" ", "+"))
                     .header("X-Mashape-Key", Util.KEY_URBAND)
                     .header("Accept", "text/plain")
