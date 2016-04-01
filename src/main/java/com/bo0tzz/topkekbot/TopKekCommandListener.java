@@ -1,10 +1,8 @@
 package com.bo0tzz.topkekbot;
 
 import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.ParseMode;
@@ -22,6 +20,7 @@ import java.util.function.Consumer;
 /**
  * Created by bo0tzz
  * Enjoyed by stuntguy3000
+ * Delighted by Mazen
  */
 public class TopKekCommandListener implements Listener {
 
@@ -130,7 +129,23 @@ public class TopKekCommandListener implements Listener {
             "What is the worst part about killing a baby?\nGetting blood on your clown suit.",
             "What's harder than nailing a dead baby to a tree?\nMy dick while doing it."
     };
-    
+
+    private static final String[] JOKES = new String[]{
+            "Why does Japan have no feminists?\nBecause they hunt whales.",
+            "A leaf and an emo fall from the tree. Who hits the ground first?\nThe leaf. The rope stopped the emo.",
+            "What is a prdophiles favourite part about Halloween?\nFree Delivery",
+            "How can you tell if your wife is dead?\nThe sex is the same but the dishes start piling up.",
+            "When my Girlfriend got pregnant, everything changed.\nMy Name, My Address, My Phone Number.",
+            "What’s the difference between feminists & Hockey Players?\nHockey Players shower after three periods.",
+            "What does the highest WNBA player make?\nSandwiches.",
+            "Whats 18 inches long and hangs infront of an asshole?\nDonald Trump’s Tie",
+            "What do you do if your lawn mower stops working?\nDeport him back to mexico.",
+            "How are an alcoholic and a necrophiliac alike?\nThey both like to crack open a cold one.",
+            "What do you call a child with a gun?\nMohammed.",
+            "My first time having sex was a lot like my first football game. I was beaten and bloodied, but at least my dad came.",
+            "What is the definition of fun?\nPlaying fetch with a pitbull and a baby."
+    };
+
     private static final String[] WHATWOULDMAZENSAY = new String[]{
         "No, I'm not interested in having a girlfriend I find it a tremendous waste of time.",
         "Hi, my name is Santiago Gonzalez and I'm 14 and I like to program.",
@@ -187,10 +202,16 @@ public class TopKekCommandListener implements Listener {
             put("bubble", that::bubble);
             put("upsidedown", that::upsidedown);
             put("deadbaby", that::deadBabyJoke);
+            put("joke", that::joke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
             put("speakwords", that::speakwords);
             put("youtube", that::youtube);
         }};
+    }
+
+    private void joke(CommandMessageReceivedEvent event) {
+        Random random = new Random();
+        event.getChat().sendMessage(SendableTextMessage.builder().message(JOKES[random.nextInt(JOKES.length - 1)]).build(), bot);
     }
 
     @Override
@@ -360,7 +381,7 @@ public class TopKekCommandListener implements Listener {
         Random random = new Random();
         event.getChat().sendMessage(SendableTextMessage.builder().message(DEADBABY_JOKES[random.nextInt(DEADBABY_JOKES.length - 1)]).build(), bot);
     }
-    
+
     private void whatWouldMazenSay(CommandMessageReceivedEvent event) {
         int chosen = ThreadLocalRandom.current().nextInt(WHATWOULDMAZENSAY.length);
         event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen], bot);
