@@ -9,6 +9,7 @@ import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEve
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 /**
  * Created by bo0tzz
@@ -16,6 +17,7 @@ import java.net.URL;
 public class TopKekListener implements Listener {
 
     private final TelegramBot bot;
+    String[] xd = {"x", "X", "d", "D"};
 
     public TopKekListener(TelegramBot bot) {
         this.bot = bot;
@@ -58,6 +60,11 @@ public class TopKekListener implements Listener {
             event.getChat().sendMessage(SendableTextMessage.builder().message("Yes yes Zack, we get it. You're tired of our shit.").replyTo(event.getMessage()).build(), bot);
         } else if (message.toLowerCase().startsWith("@topkek_bot ")) {
             event.getChat().sendMessage(message.substring(11), bot);
+        } else if (message.contains("xD")) {
+            Random r = new Random();
+            String m = "x";
+            m += xd[r.nextInt(3)];
+            event.getChat().sendMessage(m, bot);
         }
     }
 }
