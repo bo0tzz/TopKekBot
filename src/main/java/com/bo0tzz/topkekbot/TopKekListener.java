@@ -64,7 +64,7 @@ public class TopKekListener implements Listener {
             Random r = new Random();
             String m = "x";
             for (int i = 0; i < r.nextInt(10); i++) {
-                m += xd[r.nextInt(3)];
+                m += xd[r.nextInt(4)];
             }
             m += "D";
             event.getChat().sendMessage(m, bot);
