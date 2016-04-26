@@ -169,7 +169,8 @@ public class TopKekCommandListener implements Listener {
         "Are aero bars forming in my ears?",
         "I was walking down the halls and into my next class playing \"In Da Club\" by 50 cent on full volume with my laptop on one hand",
         "Less halawa more carrot aaomidi",
-        "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia"
+        "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia",
+        "http://i.imgur.com/lojRU0P.png"
     };
 
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://s.mzn.pw/index.swf)").parseMode(ParseMode.MARKDOWN).build();
