@@ -189,12 +189,12 @@ public class TopKekCommandListener implements Listener {
             put("fuckingweather", that::fuckingweather);
             put("8ball", that::eightball);
             put("lmgtfy", that::lmgtfy);
-            put("lenny", (event) -> event.getChat().sendMessage("( ͡° ͜ʖ ͡°)", bot));
-            put("idk", (event) -> event.getChat().sendMessage("¯\\_(ツ)_/¯", bot));
-            put("flip", (event) -> event.getChat().sendMessage("(╯°□°）╯︵ ┻━┻", bot));
-            put("topkek", (event) -> event.getChat().sendMessage(TOPKEK, bot));
-            put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o", bot));
-            put("source", (event) -> event.getChat().sendMessage(SOURCE, bot));
+            put("lenny", (event) -> event.getChat().sendMessage("( ͡° ͜ʖ ͡°)"));
+            put("idk", (event) -> event.getChat().sendMessage("¯\\_(ツ)_/¯"));
+            put("flip", (event) -> event.getChat().sendMessage("(╯°□°）╯︵ ┻━┻"));
+            put("topkek", (event) -> event.getChat().sendMessage(TOPKEK));
+            put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o"));
+            put("source", (event) -> event.getChat().sendMessage(SOURCE));
             put("tweet", that::tweet);
             put("roll", that::roll);
             put("lucky", that::lucky);
@@ -211,7 +211,7 @@ public class TopKekCommandListener implements Listener {
 
     private void joke(CommandMessageReceivedEvent event) {
         Random random = new Random();
-        event.getChat().sendMessage(SendableTextMessage.builder().message(JOKES[random.nextInt(JOKES.length - 1)]).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(JOKES[random.nextInt(JOKES.length - 1)]).build());
     }
 
     @Override
@@ -224,17 +224,17 @@ public class TopKekCommandListener implements Listener {
     private void choice(CommandMessageReceivedEvent event) {
         String[] args = event.getArgsString().split(",");
         if (args.length <= 1) {
-            event.getChat().sendMessage("Give me choices!", bot);
+            event.getChat().sendMessage("Give me choices!");
         } else {
             String choice = args[ThreadLocalRandom.current().nextInt(args.length)].trim();
-            event.getChat().sendMessage(SendableTextMessage.builder().message("I say " + choice).replyTo(event.getMessage()).build(), bot);
+            event.getChat().sendMessage(SendableTextMessage.builder().message("I say " + choice).replyTo(event.getMessage()).build());
         }
     }
 
     private void define(CommandMessageReceivedEvent event) {
         try {
             if (event.getArgsString().equalsIgnoreCase("mazen")) {
-                event.getChat().sendMessage("Definition of mazen: Some asshat who thinks he's the best.", bot);
+                event.getChat().sendMessage("Definition of mazen: Some asshat who thinks he's the best.");
                 return;
             }
             HttpResponse<String> response = Unirest.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=" + event.getArgsString().replace(" ", "+"))
@@ -244,16 +244,16 @@ public class TopKekCommandListener implements Listener {
             JSONObject object = new JSONObject(response.getBody());
 
             if (object.getJSONArray("list").length() == 0) {
-                event.getChat().sendMessage("No definition found for " + event.getArgsString() + "!", bot);
+                event.getChat().sendMessage("No definition found for " + event.getArgsString() + "!");
                 return;
             }
 
             JSONObject definition = object.getJSONArray("list").getJSONObject(0);
 
-            event.getChat().sendMessage("Definition of " + event.getArgsString() + ": " + definition.getString("definition"), bot);
-            event.getChat().sendMessage(definition.getString("example"), bot);
+            event.getChat().sendMessage("Definition of " + event.getArgsString() + ": " + definition.getString("definition"));
+            event.getChat().sendMessage(definition.getString("example"));
         } catch (UnirestException ex) {
-            event.getChat().sendMessage("Failed to find definition of " + event.getArgsString(), bot);
+            event.getChat().sendMessage("Failed to find definition of " + event.getArgsString());
             ex.printStackTrace();
         }
     }
@@ -264,26 +264,26 @@ public class TopKekCommandListener implements Listener {
                 event.getChat().sendMessage(SendableTextMessage.builder()
                         .message(message)
                         .replyTo(event.getMessage())
-                        .build(), bot);
+                        .build());
             }
         } catch (Exception e) {
-            event.getChat().sendMessage(SendableTextMessage.builder().message("THE FUCKING WEATHER MODULE FAILED FUCK!").build(), bot);
+            event.getChat().sendMessage(SendableTextMessage.builder().message("THE FUCKING WEATHER MODULE FAILED FUCK!").build());
             e.printStackTrace();
         }
     }
 
     private void eightball(CommandMessageReceivedEvent event) {
         int chosen = ThreadLocalRandom.current().nextInt(OPTIONS_8BALL.length);
-        event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build());
     }
 
     private void lmgtfy(CommandMessageReceivedEvent event) {
         String encoded = URLEncoder.encode(event.getArgsString());
         if (encoded.isEmpty()) {
-            event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build(), bot);
-            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/").build(), bot);
+            event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build());
+            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/").build());
         } else {
-            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build(), bot);
+            event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build());
         }
     }
 
@@ -319,11 +319,11 @@ public class TopKekCommandListener implements Listener {
                 event.getChat().sendMessage(SendableTextMessage.builder()
                         .message(out.toString())
                         .replyTo(event.getMessage())
-                        .build(), bot);
+                        .build());
             } catch (IllegalArgumentException ex) {
-                event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10", bot);
+                event.getChat().sendMessage("Incorrect args or numbers too large! Format: /roll 2d10");
             } catch (OutOfMemoryError ex) {
-                event.getChat().sendMessage("Numbers too large - not enough memory!", bot);
+                event.getChat().sendMessage("Numbers too large - not enough memory!");
             }
         }).start();
     }
@@ -331,10 +331,10 @@ public class TopKekCommandListener implements Listener {
     private void lucky(CommandMessageReceivedEvent event) {
         String result = Util.searchGoogle(event.getArgsString());
         if (result == null) {
-            event.getChat().sendMessage("No result found!", bot);
+            event.getChat().sendMessage("No result found!");
             return;
         }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build());
     }
 
     private void tiny(CommandMessageReceivedEvent event) {
@@ -347,7 +347,7 @@ public class TopKekCommandListener implements Listener {
             }
             sb.append(c);
         }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
     }
 
     private void bubble(CommandMessageReceivedEvent event) {
@@ -360,7 +360,7 @@ public class TopKekCommandListener implements Listener {
             }
             sb.append(c);
         }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
     }
 
     private void upsidedown(CommandMessageReceivedEvent event) {
@@ -374,29 +374,29 @@ public class TopKekCommandListener implements Listener {
             }
             sb.append(c);
         }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
     }
 
     private void deadBabyJoke(CommandMessageReceivedEvent event) {
         Random random = new Random();
-        event.getChat().sendMessage(SendableTextMessage.builder().message(DEADBABY_JOKES[random.nextInt(DEADBABY_JOKES.length - 1)]).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(DEADBABY_JOKES[random.nextInt(DEADBABY_JOKES.length - 1)]).build());
     }
 
     private void whatWouldMazenSay(CommandMessageReceivedEvent event) {
         int chosen = ThreadLocalRandom.current().nextInt(WHATWOULDMAZENSAY.length);
-        event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen], bot);
+        event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen]);
     }
 
     private void speakwords(CommandMessageReceivedEvent event) {
-        event.getChat().sendMessage(tweeter.getSpeakword(), bot);
+        event.getChat().sendMessage(tweeter.getSpeakword());
     }
 
     private void youtube(CommandMessageReceivedEvent event) {
         String result = Util.searchYoutube(event.getArgsString());
         if (result == null) {
-            event.getChat().sendMessage("No result found!", bot);
+            event.getChat().sendMessage("No result found!");
             return;
         }
-        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build(), bot);
+        event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build());
     }
 }

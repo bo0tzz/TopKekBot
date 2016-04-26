@@ -46,7 +46,7 @@ public class TopKekBot {
         this.bot.startUpdates(false);
         System.out.println("Updates started.");
 
-        Chat mazenchat = TelegramBot.getChat(-1001000055116L);
+        Chat mazenchat = bot.getChat(-1001000055116L);
         while (true) {
             String in = System.console().readLine();
             if ("quit".equals(in)) {
@@ -58,7 +58,7 @@ public class TopKekBot {
     }
 
     public void sendToMazen(String message) {
-        TelegramBot.getChat(-1001000055116L).sendMessage(message, this.bot);
+        bot.getChat(-1001000055116L).sendMessage(message);
     }
 
     public Map<Long, String> getLastCommand() {
@@ -79,5 +79,5 @@ public class TopKekBot {
             e.printStackTrace();
             return null;
         }
-    }
+     }
 }

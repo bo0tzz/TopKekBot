@@ -28,9 +28,9 @@ public class TopKekListener implements Listener {
         String message = event.getContent().getContent();
 
         if (message.toLowerCase().contains("pleb")) {
-            event.getChat().sendMessage("Pleb, yes.", bot);
+            event.getChat().sendMessage("Pleb, yes.");
         } else if (message.equalsIgnoreCase("thank mr bot")) {
-            event.getChat().sendMessage("may good cpus and dedotated wams come to you", bot);
+            event.getChat().sendMessage("may good cpus and dedotated wams come to you");
         } else if (message.equalsIgnoreCase("nice meme")) {
             InputFile meme = null;
             try {
@@ -38,9 +38,9 @@ public class TopKekListener implements Listener {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            event.getChat().sendMessage(SendableAudioMessage.builder().audio(meme).build(), bot);
+            event.getChat().sendMessage(SendableAudioMessage.builder().audio(meme).build());
         } else if (message.equals("fish go moo")) {
-            event.getChat().sendMessage("@TopKek_Bot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.", bot);
+            event.getChat().sendMessage("@TopKek_Bot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.");
         } else if (message.equals("tfw")) {
             String reply = "no ";
             String lastCommand = TopKekBot.getInstance().getLastCommand().get(event.getMessage().getSender().getId());
@@ -53,13 +53,13 @@ public class TopKekListener implements Listener {
             } else {
                 reply += "gf";
             }
-            event.getChat().sendMessage(reply, bot);
+            event.getChat().sendMessage(reply);
         } else if (message.toLowerCase().contains("flickr.com/photos/stuntguy3000")) {
-            event.getChat().sendMessage("Nobody likes your photos, Luke.", bot);
+            event.getChat().sendMessage("Nobody likes your photos, Luke.");
         } else if (event.getMessage().getSender().getUsername().equals("zackpollard") && (message.equals("*Sigh*") || message.equals("*Shrug*"))) {
-            event.getChat().sendMessage(SendableTextMessage.builder().message("Yes yes Zack, we get it. You're tired of our shit.").replyTo(event.getMessage()).build(), bot);
+            event.getChat().sendMessage(SendableTextMessage.builder().message("Yes yes Zack, we get it. You're tired of our shit.").replyTo(event.getMessage()).build());
         } else if (message.toLowerCase().startsWith("@topkek_bot ")) {
-            event.getChat().sendMessage(message.substring(11), bot);
+            event.getChat().sendMessage(message.substring(11));
         } else if (message.contains("xD")) {
             Random r = new Random();
             String m = "x";
@@ -67,7 +67,7 @@ public class TopKekListener implements Listener {
                 m += xd[r.nextInt(4)];
             }
             m += "D";
-            event.getChat().sendMessage(m, bot);
+            event.getChat().sendMessage(m);
         }
     }
 }

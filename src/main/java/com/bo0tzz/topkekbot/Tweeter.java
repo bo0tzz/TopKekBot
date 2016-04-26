@@ -89,12 +89,12 @@ public class Tweeter {
                                 .append("@").append(status.getUser().getScreenName())
                                 .append(" (").append(status.getUser().getName()).append(")")
                                 .append(": ").append(status.getText()).toString()).build();
-                Tweeter.this.bot.sendMessage(TelegramBot.getChat(-17349250), message);
+                Tweeter.this.bot.getChat(-17349250).sendMessage(message);
             } else if ((status.getUser().getScreenName().equalsIgnoreCase("telegram") || status.getUser().getScreenName().equalsIgnoreCase("bo0tzzz")) && !status.getText().contains("@")) {
                 SendableTextMessage message = SendableTextMessage.builder()
                         .message("Tweet by @" + status.getUser().getScreenName() + ": "
                                 + status.getText()).build();
-                Tweeter.this.bot.sendMessage(TelegramBot.getChat(-17349250), message);
+                Tweeter.this.bot.getChat(-17349250).sendMessage(message);
             }
         }
 
