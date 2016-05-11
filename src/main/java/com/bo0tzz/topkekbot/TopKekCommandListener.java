@@ -273,6 +273,10 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void eightball(CommandMessageReceivedEvent event) {
+        if (event.getArgsString().toLowerCase().contains("another one")) {
+            event.getChat().sendMessage("Another one.");
+            return;
+        }
         int chosen = ThreadLocalRandom.current().nextInt(OPTIONS_8BALL.length);
         event.getChat().sendMessage(SendableTextMessage.builder().message(OPTIONS_8BALL[chosen]).replyTo(event.getMessage()).build());
     }
