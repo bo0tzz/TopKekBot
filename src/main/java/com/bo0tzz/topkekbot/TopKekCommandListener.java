@@ -344,6 +344,7 @@ public class TopKekCommandListener implements Listener {
                 .message(out)
                 .parseMode(ParseMode.MARKDOWN)
                 .replyTo(event.getMessage())
+                .disableWebPagePreview(true)
                 .build());
     }
 
