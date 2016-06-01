@@ -339,12 +339,9 @@ public class TopKekCommandListener implements Listener {
             event.getChat().sendMessage("No result found!");
             return;
         }
-        String out = "[http://lmgtfy.com/](" + result + ")";
         event.getChat().sendMessage(SendableTextMessage.builder()
-                .message(out)
-                .parseMode(ParseMode.MARKDOWN)
+                .message(result)
                 .replyTo(event.getMessage())
-                .disableWebPagePreview(true)
                 .build());
     }
 
