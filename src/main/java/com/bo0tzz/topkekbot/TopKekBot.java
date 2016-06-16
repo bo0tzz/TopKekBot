@@ -18,7 +18,6 @@ public class TopKekBot {
     private final TelegramBot bot;
     private final Map<Long, String> lastCommand;
 
-    private final Tweeter twitter;
     private static TopKekBot instance;
 
     private TopKekBot(String authToken) {
@@ -26,8 +25,6 @@ public class TopKekBot {
         this.bot = TelegramBot.login(authToken);
         this.lastCommand = new HashMap<>();
         System.out.println("Bot logged in: " + this.bot.toString());
-        this.twitter = Tweeter.getInstance(this.bot);
-        System.out.println("Twitter API initialised");
     }
 
     public static void main(String[] args) {
@@ -41,7 +38,7 @@ public class TopKekBot {
     public void run() {
         new Thread(new Updater(this)).start();
         this.bot.getEventsManager().register(new TopKekListener(this.bot));
-        this.bot.getEventsManager().register(new TopKekCommandListener(this.bot, this.twitter));
+        this.bot.getEventsManager().register(new TopKekCommandListener(this.bot));
         System.out.println("Listener Registered");
         this.bot.startUpdates(false);
         System.out.println("Updates started.");

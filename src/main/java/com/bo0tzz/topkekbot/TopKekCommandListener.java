@@ -177,12 +177,10 @@ public class TopKekCommandListener implements Listener {
     private static final SendableTextMessage SOURCE = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
 
     private final TelegramBot bot;
-    private final Tweeter tweeter;
     private final Map<String, Consumer<CommandMessageReceivedEvent>> commands;
 
-    public TopKekCommandListener(TelegramBot bot, Tweeter tweeter) {
+    public TopKekCommandListener(TelegramBot bot) {
         this.bot = bot;
-        this.tweeter = tweeter;
         this.commands = new HashMap<String, Consumer<CommandMessageReceivedEvent>>() {{
             TopKekCommandListener that = TopKekCommandListener.this;
             put("choice", that::choice);
@@ -196,7 +194,6 @@ public class TopKekCommandListener implements Listener {
             put("topkek", (event) -> event.getChat().sendMessage(TOPKEK));
             put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o"));
             put("source", (event) -> event.getChat().sendMessage(SOURCE));
-            put("tweet", that::tweet);
             put("roll", that::roll);
             put("lucky", that::lucky);
             put("tiny", that::tiny);
@@ -205,7 +202,6 @@ public class TopKekCommandListener implements Listener {
             put("deadbaby", that::deadBabyJoke);
             put("joke", that::joke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
-            put("speakwords", that::speakwords);
             put("youtube", that::youtube);
         }};
     }
@@ -290,17 +286,6 @@ public class TopKekCommandListener implements Listener {
         } else {
             event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/?q=" + encoded).build());
         }
-    }
-
-    private void tweet(CommandMessageReceivedEvent event) {
-        String tweet;
-        if (event.getMessage().getSender().getUsername().equals("bo0tzz")) {
-            tweet = event.getArgsString();
-        } else {
-            tweet = event.getMessage().getSender().getUsername() + " says: " + event.getArgsString();
-        }
-        System.out.println(("Tweeting: " + tweet));
-        this.tweeter.sendTweet(tweet);
     }
 
     private void roll(CommandMessageReceivedEvent event) {
@@ -393,10 +378,6 @@ public class TopKekCommandListener implements Listener {
     private void whatWouldMazenSay(CommandMessageReceivedEvent event) {
         int chosen = ThreadLocalRandom.current().nextInt(WHATWOULDMAZENSAY.length);
         event.getChat().sendMessage(WHATWOULDMAZENSAY[chosen]);
-    }
-
-    private void speakwords(CommandMessageReceivedEvent event) {
-        event.getChat().sendMessage(tweeter.getSpeakword());
     }
 
     private void youtube(CommandMessageReceivedEvent event) {
