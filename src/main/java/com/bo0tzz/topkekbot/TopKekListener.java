@@ -68,6 +68,8 @@ public class TopKekListener implements Listener {
             }
             m += "D";
             event.getChat().sendMessage(m);
+        } else if (message.equalsIgnoreCase("true love")) {
+            event.getChat().sendMessage("http://i.imgur.com/nRAZBRs.png");
         }
     }
 }
