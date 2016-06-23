@@ -1,14 +1,11 @@
 package com.bo0tzz.topkekbot;
 
 import pro.zackpollard.telegrambot.api.TelegramBot;
-import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
-import pro.zackpollard.telegrambot.api.chat.message.send.SendableAudioMessage;
-import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,59 +14,48 @@ import java.util.Random;
 public class TopKekListener implements Listener {
 
     private final TelegramBot bot;
-    String[] xd = {"x", "X", "d", "D"};
+    private final List<TextAction> textActions;
+    private final String[] xd = {"x", "X", "d", "D"};
 
     public TopKekListener(TelegramBot bot) {
+        textActions = new LinkedList<TextAction>() {{
+            add(new TextAction((t) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
+            add(new TextAction((t) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
+            add(new TextAction((t) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
+            add(new TextAction((t) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
+            add(new TextAction((t) -> t.toLowerCase().contains("flickr.com/photos/stuntguy3000"), (e) -> "Nobody likes your photos, Luke"));
+            add(new TextAction((t) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
+            add(new TextAction((t) -> t.toLowerCase().startsWith("topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
+            add(new TextAction((t) -> t.contains("xD"), (e) -> {
+                Random r = new Random();
+                String m = "x";
+                for (int i = 0; i < r.nextInt(10); i++) {
+                    m += xd[r.nextInt(4)];
+                }
+                m += "D";
+                return m;
+            }));
+            add(new TextAction((t) -> t.equals("tfw"), (e) -> {
+                String reply = "no ";
+                String lastCommand = TopKekBot.getInstance().getLastCommand().get(e.getMessage().getSender().getId());
+                if(lastCommand != null) {
+                    if(lastCommand.equals("getgif")) {
+                        reply += "gif";
+                    } else {
+                        reply += "gf";
+                    }
+                } else {
+                    reply += "gf";
+                }
+                return reply;
+            }));
+        }};
         this.bot = bot;
     }
 
     @Override
     public void onTextMessageReceived(TextMessageReceivedEvent event) {
         String message = event.getContent().getContent();
-
-        if (message.toLowerCase().contains("pleb")) {
-            event.getChat().sendMessage("Pleb, yes.");
-        } else if (message.equalsIgnoreCase("thank mr bot")) {
-            event.getChat().sendMessage("may good cpus and dedotated wams come to you");
-        } else if (message.equalsIgnoreCase("nice meme")) {
-            InputFile meme = null;
-            try {
-                meme = new InputFile(new URL("http://niceme.me/nicememe.mp3"));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            event.getChat().sendMessage(SendableAudioMessage.builder().audio(meme).build());
-        } else if (message.equals("fish go moo")) {
-            event.getChat().sendMessage("@TopKek_Bot notices that " + event.getMessage().getSender().getFullName() + " is truly enlightened.");
-        } else if (message.equals("tfw")) {
-            String reply = "no ";
-            String lastCommand = TopKekBot.getInstance().getLastCommand().get(event.getMessage().getSender().getId());
-            if(lastCommand != null) {
-                if(lastCommand.equals("getgif")) {
-                    reply += "gif";
-                } else {
-                    reply += "gf";
-                }
-            } else {
-                reply += "gf";
-            }
-            event.getChat().sendMessage(reply);
-        } else if (message.toLowerCase().contains("flickr.com/photos/stuntguy3000")) {
-            event.getChat().sendMessage("Nobody likes your photos, Luke.");
-        } else if (event.getMessage().getSender().getUsername().equals("zackpollard") && (message.equals("*Sigh*") || message.equals("*Shrug*"))) {
-            event.getChat().sendMessage(SendableTextMessage.builder().message("Yes yes Zack, we get it. You're tired of our shit.").replyTo(event.getMessage()).build());
-        } else if (message.toLowerCase().startsWith("@topkek_bot ")) {
-            event.getChat().sendMessage(message.substring(11));
-        } else if (message.contains("xD")) {
-            Random r = new Random();
-            String m = "x";
-            for (int i = 0; i < r.nextInt(10); i++) {
-                m += xd[r.nextInt(4)];
-            }
-            m += "D";
-            event.getChat().sendMessage(m);
-        } else if (message.equalsIgnoreCase("true love")) {
-            event.getChat().sendMessage("http://i.imgur.com/nRAZBRs.png");
-        }
+        textActions.stream().filter(t -> t.test(message)).forEach(t -> event.getChat().sendMessage(t.execute(event)));
     }
 }
