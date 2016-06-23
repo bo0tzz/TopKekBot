@@ -13,7 +13,7 @@ import java.net.URL;
  */
 public class Updater implements Runnable {
 
-    TopKekBot topKekBot;
+    private final TopKekBot topKekBot;
 
     public Updater(TopKekBot topKekBot) {
         this.topKekBot = topKekBot;

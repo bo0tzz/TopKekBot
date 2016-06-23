@@ -19,11 +19,11 @@ import java.net.URL;
  */
 public class Util {
 
-    public static String KEY_URBAND = "dizTuKjw5YmshkKeiWx81uNJveqyp1ZzzudjsnlR2vv3ivQ7NM";
+    public static final String KEY_URBAND = "dizTuKjw5YmshkKeiWx81uNJveqyp1ZzzudjsnlR2vv3ivQ7NM";
 
 
-    private static String KEY_OWM = "a81a1c5ad56bee73f957cc529ed07fa2";
-    private static String url = "http://api.openweathermap.org/data/2.5/weather?units=imperial&APPID=" + KEY_OWM + "&q=";
+    private static final String KEY_OWM = "a81a1c5ad56bee73f957cc529ed07fa2";
+    private static final String url = "http://api.openweathermap.org/data/2.5/weather?units=imperial&APPID=" + KEY_OWM + "&q=";
 
     public static String[] getWeather(String location) throws JSONException, IOException {
         String call = (url + location).replace(' ', '+');
@@ -84,8 +84,7 @@ public class Util {
         if (array.length() == 0) {
             return null;
         }
-        String result = array.getJSONObject(0).getString("link");
-        return result;
+        return array.getJSONObject(0).getString("link");
     }
 
     public static String searchYoutube(String query) {
@@ -101,7 +100,6 @@ public class Util {
         if (array.length() == 0) {
             return null;
         }
-        String result = array.getJSONObject(0).getString("link");
-        return result;
+        return array.getJSONObject(0).getString("link");
     }
 }

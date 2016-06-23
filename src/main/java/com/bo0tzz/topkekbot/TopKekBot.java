@@ -35,7 +35,7 @@ public class TopKekBot {
         new TopKekBot(args[0]).run();
     }
 
-    public void run() {
+    private void run() {
         new Thread(new Updater(this)).start();
         this.bot.getEventsManager().register(new TopKekListener(this.bot));
         this.bot.getEventsManager().register(new TopKekCommandListener(this.bot));
@@ -70,8 +70,7 @@ public class TopKekBot {
 
     public static String getGoogleKey() {
         try {
-            String key = FileUtils.readFileToString(new File("gkey"));
-            return key;
+            return FileUtils.readFileToString(new File("gkey"));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
