@@ -56,6 +56,6 @@ public class TopKekListener implements Listener {
     @Override
     public void onTextMessageReceived(TextMessageReceivedEvent event) {
         String message = event.getContent().getContent();
-        textActions.stream().filter(t -> t.test(message)).forEach(t -> event.getChat().sendMessage(t.execute(event)));
+        textActions.stream().filter(t -> t.test(message)).forEach(t -> event.getChat().sendMessage(t.apply(event)));
     }
 }

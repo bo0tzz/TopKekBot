@@ -18,7 +18,7 @@ public class TextAction {
         this.function = function;
     }
 
-    public String execute(TextMessageReceivedEvent event) {
+    public String apply(TextMessageReceivedEvent event) {
         return function.apply(event);
     }
 
