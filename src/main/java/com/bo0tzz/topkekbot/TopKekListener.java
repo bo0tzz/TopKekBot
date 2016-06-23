@@ -25,7 +25,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
             add(new TextAction((t) -> t.toLowerCase().contains("flickr.com/photos/stuntguy3000"), (e) -> "Nobody likes your photos, Luke"));
             add(new TextAction((t) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
-            add(new TextAction((t) -> t.toLowerCase().startsWith("topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
+            add(new TextAction((t) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
             add(new TextAction((t) -> t.contains("xD"), (e) -> {
                 Random r = new Random();
                 String m = "x";
