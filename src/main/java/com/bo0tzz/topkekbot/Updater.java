@@ -37,6 +37,8 @@ public class Updater implements Runnable {
                 newBuild = Integer.parseInt(Unirest.get("http://ci.zackpollard.pro/job/TopKekBot/lastSuccessfulBuild/buildNumber").asString().getBody());
             } catch (UnirestException e) {
                 e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
             if (newBuild > currentBuild) {
                 System.out.println("New build found!");
