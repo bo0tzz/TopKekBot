@@ -40,12 +40,8 @@ public class TopKekListener implements Listener {
             add(new TextAction((t) -> t.equals("tfw"), (e) -> {
                 String reply = "no ";
                 String lastCommand = TopKekBot.getInstance().getLastCommand().get(e.getMessage().getSender().getId());
-                if(lastCommand != null) {
-                    if(lastCommand.equals("getgif")) {
-                        reply += "gif";
-                    } else {
-                        reply += "gf";
-                    }
+                if(lastCommand != null && lastCommand.equals("getgif")) {
+                    reply += "gif";
                 } else {
                     reply += "gf";
                 }
