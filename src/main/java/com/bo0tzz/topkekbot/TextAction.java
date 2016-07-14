@@ -1,19 +1,20 @@
 package com.bo0tzz.topkekbot;
 
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
+import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
+import java.util.function.BiPredicate;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * Created by bo0tzz on 23-6-2016.
  */
 public class TextAction {
 
-    private final Predicate<String> predicate;
+    private final BiPredicate<String, TextMessageReceivedEvent> predicate;
     private final Function<TextMessageReceivedEvent, String> function;
 
-    TextAction(Predicate<String> predicate, Function<TextMessageReceivedEvent, String> function) {
+    TextAction(BiPredicate<String, TextMessageReceivedEvent> predicate, Function<TextMessageReceivedEvent, String> function) {
         this.predicate = predicate;
         this.function = function;
     }
@@ -22,8 +23,8 @@ public class TextAction {
         return function.apply(event);
     }
 
-    public boolean test(String s) {
-        return predicate.test(s);
+    public boolean test(String s, TextMessageReceivedEvent c) {
+        return predicate.test(s, c);
     }
 
 }

@@ -19,16 +19,17 @@ public class TopKekListener implements Listener {
 
     public TopKekListener(TelegramBot bot) {
         textActions = new LinkedList<TextAction>() {{
-            add(new TextAction((t) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
-            add(new TextAction((t) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
-            add(new TextAction((t) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
-            add(new TextAction((t) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
-            add(new TextAction((t) -> t.toLowerCase().contains("flickr.com/photos/stuntguy3000"), (e) -> "Nobody likes your photos, Luke"));
-            add(new TextAction((t) -> t.equalsIgnoreCase("hi"), (e) -> "sup"));
-            add(new TextAction((t) -> t.equalsIgnoreCase("sup"), (e) -> "hi"));
-            add(new TextAction((t) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
-            add(new TextAction((t) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
-            add(new TextAction((t) -> t.contains("xD"), (e) -> {
+            add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
+            add(new TextAction((t, ev) -> t.toLowerCase().contains("flickr.com/photos/stuntguy3000"), (e) -> "Nobody likes your photos, Luke"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("hi"), (e) -> "sup"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("sup"), (e) -> "hi"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
+            add(new TextAction((t, ev) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
+            add(new TextAction((t, ev) -> t.equals("!!") && ev.getMessage().getSender().getUsername().equals("JulianAyy"), (e) -> "Autism!"));
+            add(new TextAction((t, ev) -> t.contains("xD"), (e) -> {
                 Random r = new Random();
                 String m = "x";
                 for (int i = 0; i < r.nextInt(10); i++) {
@@ -37,7 +38,7 @@ public class TopKekListener implements Listener {
                 m += "D";
                 return m;
             }));
-            add(new TextAction((t) -> t.equals("tfw"), (e) -> {
+            add(new TextAction((t, ev) -> t.equals("tfw"), (e) -> {
                 String reply = "no ";
                 String lastCommand = TopKekBot.getInstance().getLastCommand().get(e.getMessage().getSender().getId());
                 if(lastCommand != null && lastCommand.equals("getgif")) {
@@ -54,6 +55,6 @@ public class TopKekListener implements Listener {
     @Override
     public void onTextMessageReceived(TextMessageReceivedEvent event) {
         String message = event.getContent().getContent();
-        textActions.stream().filter(t -> t.test(message)).forEach(t -> event.getChat().sendMessage(t.apply(event)));
+        textActions.stream().filter(t -> t.test(message, event)).forEach(t -> event.getChat().sendMessage(t.apply(event)));
     }
 }
