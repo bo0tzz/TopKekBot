@@ -203,6 +203,7 @@ public class TopKekCommandListener implements Listener {
             put("joke", that::joke);
             put("whatwouldmazensay", that::whatWouldMazenSay);
             put("youtube", that::youtube);
+            put("kms", (event -> event.getChat().sendMessage("u ded")));
         }};
     }
 
