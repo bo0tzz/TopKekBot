@@ -148,6 +148,7 @@ public class TopKekCommandListener implements Listener {
     };
 
     private static final String[] WHATWOULDMAZENSAY = new String[]{
+        "It's not love, it's common sense",
         "No, I'm not interested in having a girlfriend I find it a tremendous waste of time.",
         "Hi, my name is Santiago Gonzalez and I'm 14 and I like to program.",
         "I'm fluent in a dozen different programming languages.",
