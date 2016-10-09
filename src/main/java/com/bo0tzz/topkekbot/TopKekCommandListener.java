@@ -200,6 +200,7 @@ public class TopKekCommandListener implements Listener {
             put("whatwouldmazensay", that::whatWouldMazenSay);
             put("youtube", that::youtube);
             put("kms", (event -> event.getChat().sendMessage("u ded")));
+            put("isdead", that::isDead);
         }};
     }
 
@@ -215,6 +216,11 @@ public class TopKekCommandListener implements Listener {
         }).accept(event);
     }
 
+    private void isDead(CommandMessageReceivedEvent event) {
+        String dead = event.getArgsString();
+        event.getChat().sendMessage(String.format("%1$s is dead. %1$s remains dead. And we have killed him. How shall we comfort ourselves, the murderers of all murderers? What was holiest and mightiest of all that the world has yet owned has bled to death under our knives: who will wipe this blood off us? What water is there for us to clean ourselves? What festivals of atonement, what sacred games shall we have to invent? Is not the greatness of this deed too great for us? Must we ourselves not become gods simply to appear worthy of it?", dead));
+    }
+    
     private void choice(CommandMessageReceivedEvent event) {
         String[] args = event.getArgsString().split(",");
         if (args.length <= 1) {
