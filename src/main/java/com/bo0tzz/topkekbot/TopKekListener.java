@@ -30,6 +30,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Mazen is fat"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
             add(new TextAction((t, ev) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
+            add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
             add(new TextAction((t, ev) -> (t.contains("!!") || t.contains("ROFL")) && ev.getMessage().getSender().getUsername().equals("JulianAyy"), (e) -> "Autism!"));
             add(new TextAction((t, ev) -> t.contains("xD"), (e) -> {
                 Random r = new Random();
