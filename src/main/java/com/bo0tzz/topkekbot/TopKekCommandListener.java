@@ -54,6 +54,9 @@ public class TopKekCommandListener implements Listener {
             "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s",
             "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
     };
+    private static final String[] AESTHETIC_LETTERS = {
+            "﻿Ａ","Ｂ","Ｃ","Ｄ","Ｅ","Ｆ","Ｇ","Ｈ","Ｉ","Ｊ","Ｋ","Ｌ","Ｍ","Ｎ","Ｏ","Ｐ","Ｑ","Ｒ","Ｓ","Ｔ","Ｕ","Ｖ","Ｗ","Ｘ","Ｙ","Ｚ"
+    };
     private static final String[] DEADBABY_JOKES = {
             "What is funnier than a dead baby?\nA dead baby in a clown costume.",
             "What is the difference between a baby and a onion?\nNo one cries when you chop up the baby.",
@@ -201,6 +204,7 @@ public class TopKekCommandListener implements Listener {
             put("youtube", that::youtube);
             put("kms", (event -> event.getChat().sendMessage("u ded")));
             put("isdead", that::isDead);
+            put("aesthetic", that::aesthetic);
         }};
     }
 
@@ -391,4 +395,18 @@ public class TopKekCommandListener implements Listener {
         }
         event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build());
     }
+
+    private void aesthetic(CommandMessageReceivedEvent event) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+            int index = ((int) c) - 97; //Character code "a" starts at 97
+            if (index >= 0 && index <= 25) {
+                sb.append(AESTHETIC_LETTERS[index] + " ");
+                continue;
+            }
+            sb.append(c + " ");
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
+    }
+
 }
