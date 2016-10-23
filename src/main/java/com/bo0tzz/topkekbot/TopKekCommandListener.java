@@ -401,10 +401,10 @@ public class TopKekCommandListener implements Listener {
         for (char c : event.getArgsString().toLowerCase().toCharArray()) {
             int index = ((int) c) - 97; //Character code "a" starts at 97
             if (index >= 0 && index <= 25) {
-                sb.append(AESTHETIC_LETTERS[index]);
+                sb.append(AESTHETIC_LETTERS[index] + " ");
                 continue;
             }
-            sb.append(c);
+            sb.append(c + " ");
         }
         event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
     }
