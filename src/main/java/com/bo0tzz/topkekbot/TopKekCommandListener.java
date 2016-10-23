@@ -45,6 +45,9 @@ public class TopKekCommandListener implements Listener {
             "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ᶰ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
             "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
     };
+    private static final String[] TINY_NUMBERS = {
+            "⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"
+    };
     private static final String[] BUBBLE_LETTERS = {
             "Ⓐ ", "Ⓑ", "Ⓒ", "Ⓓ", "Ⓔ", "Ⓕ", "Ⓖ", "Ⓗ", "Ⓘ", "Ⓙ", "Ⓚ", "Ⓛ", "Ⓜ", "Ⓝ", "Ⓞ", "Ⓟ", "Ⓠ", "Ⓡ", "Ⓢ", "Ⓣ", "Ⓤ", "Ⓥ", "Ⓦ", "Ⓧ", "Ⓨ",
             "Ⓩ", "[", "\\", "]", "^", "_", "`", "ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ",
@@ -340,10 +343,20 @@ public class TopKekCommandListener implements Listener {
     private void tiny(CommandMessageReceivedEvent event) {
         StringBuilder sb = new StringBuilder();
         for (char c : event.getArgsString().toLowerCase().toCharArray()) {
-            int index = ((int) c) - 97; //Character code "a" starts at 97
-            if (index >= 0 && index <= 25) {
-                sb.append(TINY_LETTERS[index]);
-                continue;
+            if (Character.isDigit(c)) {
+                int index = ((int) c) - 48; //Character code "0" starts at 48
+                if (index >= 0 && index <= 9) {
+                    sb.append(TINY_NUMBERS[index]);
+                    continue;
+                }
+            }
+
+            if (Character.isAlphabetic(c)) {
+                int index = ((int) c) - 97; //Character code "a" starts at 97
+                if (index >= 0 && index <= 25) {
+                    sb.append(TINY_LETTERS[index]);
+                    continue;
+                }
             }
             sb.append(c);
         }
@@ -390,7 +403,7 @@ public class TopKekCommandListener implements Listener {
     private void youtube(CommandMessageReceivedEvent event) {
         String result = Util.searchYoutube(event.getArgsString());
         if (result == null) {
-            event.getChat().sendMessage("No result found!");
+            event.getChat().sendMessage("No video found!");
             return;
         }
         event.getChat().sendMessage(SendableTextMessage.builder().message(result).replyTo(event.getMessage()).build());
@@ -401,10 +414,10 @@ public class TopKekCommandListener implements Listener {
         for (char c : event.getArgsString().toLowerCase().toCharArray()) {
             int index = ((int) c) - 97; //Character code "a" starts at 97
             if (index >= 0 && index <= 25) {
-                sb.append(AESTHETIC_LETTERS[index] + " ");
+                sb.append(AESTHETIC_LETTERS[index]).append(" ");
                 continue;
             }
-            sb.append(c + " ");
+            sb.append(c).append(" ");
         }
         event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
     }
