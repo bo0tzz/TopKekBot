@@ -22,8 +22,6 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("blend"), (e) -> "But will it blend?"));
-            add(new TextAction((t, ev) -> t.equalsIgnoreCase("hue") && ev.getMessage().getSender().getUsername().equals("@mattrick"), (e) ->
-                    "I'm going to shove that hue up your ass mattrick."));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
@@ -33,6 +31,8 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Mazen is fat"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
             add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("hue") && ev.getMessage().getSender().getUsername().equals("@mattrick"), (e) ->
+                    "I'm going to shove that hue up your ass mattrick."));
             add(new TextAction((t, ev) -> (t.contains("!!") || t.contains("ROFL")) && ev.getMessage().getSender().getUsername().equals("JulianAyy"), (e) -> "Autism!"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("*sigh*") && ev.getMessage().getSender().getUsername().equalsIgnoreCase("@zackpollard"),
                     (e) -> "Yes yes Zack, we get it, you're sick of our shit."));
