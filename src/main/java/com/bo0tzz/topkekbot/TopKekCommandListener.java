@@ -58,7 +58,7 @@ public class TopKekCommandListener implements Listener {
             "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
     };
     private static final String[] AESTHETIC_LETTERS = {
-            "﻿Ａ","Ｂ","Ｃ","Ｄ","Ｅ","Ｆ","Ｇ","Ｈ","Ｉ","Ｊ","Ｋ","Ｌ","Ｍ","Ｎ","Ｏ","Ｐ","Ｑ","Ｒ","Ｓ","Ｔ","Ｕ","Ｖ","Ｗ","Ｘ","Ｙ","Ｚ"
+            "﻿Ａ", "Ｂ", "Ｃ", "Ｄ", "Ｅ", "Ｆ", "Ｇ", "Ｈ", "Ｉ", "Ｊ", "Ｋ", "Ｌ", "Ｍ", "Ｎ", "Ｏ", "Ｐ", "Ｑ", "Ｒ", "Ｓ", "Ｔ", "Ｕ", "Ｖ", "Ｗ", "Ｘ", "Ｙ", "Ｚ"
     };
     private static final String[] DEADBABY_JOKES = {
             "What is funnier than a dead baby?\nA dead baby in a clown costume.",
@@ -149,30 +149,30 @@ public class TopKekCommandListener implements Listener {
     };
 
     private static final String[] WHATWOULDMAZENSAY = new String[]{
-        "It's not love, it's common sense",
-        "No, I'm not interested in having a girlfriend I find it a tremendous waste of time.",
-        "Hi, my name is Santiago Gonzalez and I'm 14 and I like to program.",
-        "I'm fluent in a dozen different programming languages.",
-        "Thousands of people have downloaded my apps for the Mac, iPhone, and iPad.",
-        "I will be 16 when I graduate college and 17 when I finish my masters.",
-        "I really like learning, I find it as essential as eating.",
-        "Dr. Bakos: I often have this disease which I call long line-itus.",
-        "Dr. Bakos: Are you eager enough just to write down a slump of code, or is the code itself a artistic medium?",
-        "Beautiful code is short and concise.",
-        "When you're around a certain race enough, you tend to become like them physically and mentally; soon enough I'll be driving terribly and doing math competitions",
-        "Sometimes when I go to sleep I'm stuck with that annoying bug I cannot fix, and in my dreams I see myself programming. \nWhen I wake up I have the solution!",
-        "One of the main reasons I started developing apps was to help people what they want to do like decorate a christmas tree.",
-        "I really like to crochet.",
-        "I made a good website http://slgonzalez.com/",
-        "If that was my sister I'd eat her.",
-        "http://i.imgur.com/9gweTJV.png",
-        "ISIS more like waswas",
-        "eat less food habibi @aaomidi",
-        "Are aero bars forming in my ears?",
-        "I was walking down the halls and into my next class playing \"In Da Club\" by 50 cent on full volume with my laptop on one hand",
-        "Less halawa more carrot aaomidi",
-        "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia",
-        "http://i.imgur.com/lojRU0P.png"
+            "It's not love, it's common sense",
+            "No, I'm not interested in having a girlfriend I find it a tremendous waste of time.",
+            "Hi, my name is Santiago Gonzalez and I'm 14 and I like to program.",
+            "I'm fluent in a dozen different programming languages.",
+            "Thousands of people have downloaded my apps for the Mac, iPhone, and iPad.",
+            "I will be 16 when I graduate college and 17 when I finish my masters.",
+            "I really like learning, I find it as essential as eating.",
+            "Dr. Bakos: I often have this disease which I call long line-itus.",
+            "Dr. Bakos: Are you eager enough just to write down a slump of code, or is the code itself a artistic medium?",
+            "Beautiful code is short and concise.",
+            "When you're around a certain race enough, you tend to become like them physically and mentally; soon enough I'll be driving terribly and doing math competitions",
+            "Sometimes when I go to sleep I'm stuck with that annoying bug I cannot fix, and in my dreams I see myself programming. \nWhen I wake up I have the solution!",
+            "One of the main reasons I started developing apps was to help people what they want to do like decorate a christmas tree.",
+            "I really like to crochet.",
+            "I made a good website http://slgonzalez.com/",
+            "If that was my sister I'd eat her.",
+            "http://i.imgur.com/9gweTJV.png",
+            "ISIS more like waswas",
+            "eat less food habibi @aaomidi",
+            "Are aero bars forming in my ears?",
+            "I was walking down the halls and into my next class playing \"In Da Club\" by 50 cent on full volume with my laptop on one hand",
+            "Less halawa more carrot aaomidi",
+            "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia",
+            "http://i.imgur.com/lojRU0P.png"
     };
 
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://waitw.at/topkek)").parseMode(ParseMode.MARKDOWN).build();
@@ -227,7 +227,7 @@ public class TopKekCommandListener implements Listener {
         String dead = event.getArgsString();
         event.getChat().sendMessage(String.format("%1$s is dead. %1$s remains dead. And we have killed him. How shall we comfort ourselves, the murderers of all murderers? What was holiest and mightiest of all that the world has yet owned has bled to death under our knives: who will wipe this blood off us? What water is there for us to clean ourselves? What festivals of atonement, what sacred games shall we have to invent? Is not the greatness of this deed too great for us? Must we ourselves not become gods simply to appear worthy of it?", dead));
     }
-    
+
     private void choice(CommandMessageReceivedEvent event) {
         String[] args = event.getArgsString().split(",");
         if (args.length <= 1) {
@@ -341,6 +341,11 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void tiny(CommandMessageReceivedEvent event) {
+        if (event.getArgs().length == 0) {
+            event.getChat().sendMessage("Yes mattrick is tiny.");
+            return;
+        }
+
         StringBuilder sb = new StringBuilder();
         for (char c : event.getArgsString().toLowerCase().toCharArray()) {
             if (Character.isDigit(c)) {
