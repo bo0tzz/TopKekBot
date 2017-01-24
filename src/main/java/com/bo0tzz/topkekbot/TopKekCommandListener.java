@@ -22,6 +22,7 @@ import java.util.function.Consumer;
  * Enjoyed by stuntguy3000
  * Delighted by Mazen
  */
+
 public class TopKekCommandListener implements Listener {
 
     private static final String[] OPTIONS_8BALL = {
@@ -41,25 +42,33 @@ public class TopKekCommandListener implements Listener {
             "Outlook not so good",
             "Very doubtful"
     };
+
     private static final String[] TINY_LETTERS = {
-            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ᶰ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ",
-            "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
+            "ᵃ", "ᵇ", "ᶜ", "ᵈ", "ᵉ", "ᶠ", "ᵍ", "ʰ", "ᶦ", "ʲ", "ᵏ", "ˡ", "ᵐ", "ᶰ", "ᵒ", "ᵖ", "q", "ʳ", "ˢ", "ᵗ", "ᵘ", "ᵛ", "ʷ", "ˣ", "ʸ", "ᶻ"
     };
+
     private static final String[] TINY_NUMBERS = {
             "⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"
     };
+
     private static final String[] BUBBLE_LETTERS = {
             "Ⓐ ", "Ⓑ", "Ⓒ", "Ⓓ", "Ⓔ", "Ⓕ", "Ⓖ", "Ⓗ", "Ⓘ", "Ⓙ", "Ⓚ", "Ⓛ", "Ⓜ", "Ⓝ", "Ⓞ", "Ⓟ", "Ⓠ", "Ⓡ", "Ⓢ", "Ⓣ", "Ⓤ", "Ⓥ", "Ⓦ", "Ⓧ", "Ⓨ",
             "Ⓩ", "[", "\\", "]", "^", "_", "`", "ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ",
             "ⓠ", "ⓡ", "ⓢ", "ⓣ", "ⓤ", "ⓥ", "ⓦ", "ⓧ", "ⓨ", "ⓩ"
     };
+
     private static final String[] UPSIDEDOWN_LETTERS = {
-            "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s",
-            "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
+            "ɐ", "q", "ɔ", "p", "ǝ", "ɟ", "ƃ", "ɥ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s", "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"
     };
+
     private static final String[] AESTHETIC_LETTERS = {
             "﻿Ａ", "Ｂ", "Ｃ", "Ｄ", "Ｅ", "Ｆ", "Ｇ", "Ｈ", "Ｉ", "Ｊ", "Ｋ", "Ｌ", "Ｍ", "Ｎ", "Ｏ", "Ｐ", "Ｑ", "Ｒ", "Ｓ", "Ｔ", "Ｕ", "Ｖ", "Ｗ", "Ｘ", "Ｙ", "Ｚ"
     };
+
+    private static final String[] GIANT_LETTERS = {
+            "🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹", "🇺", "🇻", "🇼", "🇽", "🇾", "🇿"
+    };
+
     private static final String[] DEADBABY_JOKES = {
             "What is funnier than a dead baby?\nA dead baby in a clown costume.",
             "What is the difference between a baby and a onion?\nNo one cries when you chop up the baby.",
@@ -173,7 +182,8 @@ public class TopKekCommandListener implements Listener {
             "Less halawa more carrot aaomidi",
             "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia",
             "http://i.imgur.com/lojRU0P.png",
-            "Halam motherfucker!"
+            "Halam motherfucker!",
+            "LOLOLOL"
     };
 
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://waitw.at/topkek)").parseMode(ParseMode.MARKDOWN).build();
@@ -209,6 +219,7 @@ public class TopKekCommandListener implements Listener {
             put("kms", (event -> event.getChat().sendMessage("u ded")));
             put("isdead", that::isDead);
             put("aesthetic", that::aesthetic);
+            put("giant", that::giant);
         }};
     }
 
@@ -422,6 +433,26 @@ public class TopKekCommandListener implements Listener {
             if (index >= 0 && index <= 25) {
                 sb.append(AESTHETIC_LETTERS[index]).append(" ");
                 continue;
+            }
+            sb.append(c).append(" ");
+        }
+        event.getChat().sendMessage(SendableTextMessage.builder().message(sb.toString()).replyTo(event.getMessage()).build());
+    }
+
+    private void giant(CommandMessageReceivedEvent event) {
+        if (event.getArgs().length == 0) {
+            event.getChat().sendMessage("Yes Amir is giant.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (char c : event.getArgsString().toLowerCase().toCharArray()) {
+            if (Character.isAlphabetic(c)) {
+                int index = ((int) c) - 97; //Character code "a" starts at 97
+                if (index >= 0 && index <= 25) {
+                    sb.append(GIANT_LETTERS[index]);
+                    continue;
+                }
             }
             sb.append(c).append(" ");
         }
