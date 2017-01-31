@@ -197,6 +197,7 @@ public class TopKekCommandListener implements Listener {
             put("topkek", (event) -> event.getChat().sendMessage(TOPKEK));
             put("wat", (event) -> event.getChat().sendMessage("http://waitw.at 0.o"));
             put("source", (event) -> event.getChat().sendMessage(SOURCE));
+            put("help", (event) -> event.getChat().sendMessage("HELP"));            
             put("roll", that::roll);
             put("lucky", that::lucky);
             put("tiny", that::tiny);
