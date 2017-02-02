@@ -42,7 +42,8 @@ public class TopKekBot {
         System.out.println("Listener Registered");
         this.bot.startUpdates(false);
         System.out.println("Updates started.");
-
+        this.sendToMazen("Bot just updated!\n\nOr maybe it just died and restarted.\n\nIt probably just died...");
+        
         Chat mazenchat = bot.getChat(-1001000055116L);
         while (true) {
             String in = System.console().readLine();
