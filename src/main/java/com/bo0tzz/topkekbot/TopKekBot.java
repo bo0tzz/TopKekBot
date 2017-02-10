@@ -1,5 +1,6 @@
 package com.bo0tzz.topkekbot;
 
+import java.util.Scanner;
 import org.apache.commons.io.FileUtils;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.Chat;
@@ -43,20 +44,27 @@ public class TopKekBot {
         this.bot.startUpdates(false);
         System.out.println("Updates started.");
         this.sendToMazen("Bot just updated!\n\nOr maybe it just died and restarted.\n\nIt probably just died...");
-        
+
         Chat mazenchat = bot.getChat(-1001000055116L);
-        while (true) {
-            String in = System.console().readLine();
-            if ("quit".equals(in)) {
-                break;
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                String in = scanner.nextLine();
+                if ("quit".equals(in)) {
+                    break;
+                }
+                if (mazenchat != null) {
+                    mazenchat.sendMessage(in);
+                } else {
+                    System.out.println("couldn't find mazen's chat :(");
+                }
             }
-            SendableTextMessage message = SendableTextMessage.builder().message(in).build();
-            this.bot.sendMessage(mazenchat, message);
         }
     }
 
     public void sendToMazen(String message) {
-        bot.getChat(-1001000055116L).sendMessage(message);
+        Chat chat = bot.getChat(-1001000055116L);
+        if (chat != null)
+            chat.sendMessage(message);
     }
 
     public Map<Long, String> getLastCommand() {
