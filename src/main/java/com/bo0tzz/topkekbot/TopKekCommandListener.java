@@ -5,6 +5,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
 import pro.zackpollard.telegrambot.api.TelegramBot;
+import pro.zackpollard.telegrambot.api.chat.ChatType;
 import pro.zackpollard.telegrambot.api.chat.message.send.ParseMode;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
@@ -220,6 +221,8 @@ public class TopKekCommandListener implements Listener {
 
     @Override
     public void onCommandMessageReceived(CommandMessageReceivedEvent event) {
+        if (!event.isBotMentioned() && event.getChat().getType() != ChatType.PRIVATE)
+            return;
         TopKekBot.getInstance().getLastCommand().put(event.getMessage().getSender().getId(), event.getCommand());
         this.commands.getOrDefault(event.getCommand().toLowerCase(), (c) -> {
         }).accept(event);

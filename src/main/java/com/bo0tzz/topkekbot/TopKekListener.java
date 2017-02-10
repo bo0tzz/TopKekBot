@@ -1,6 +1,12 @@
 package com.bo0tzz.topkekbot;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.regex.Pattern;
 import pro.zackpollard.telegrambot.api.TelegramBot;
+import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
+import pro.zackpollard.telegrambot.api.chat.message.send.SendablePhotoMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
@@ -17,7 +23,24 @@ public class TopKekListener implements Listener {
     private final List<TextAction> textActions;
     private final String[] xd = {"x", "X", "d", "D"};
 
+    private final Pattern jokesOnYouPattern = Pattern.compile("joke'?s? ?on ?you", Pattern.CASE_INSENSITIVE);
+    private final String jokesOnYouUrl = "http://i.imgur.com/4y6krel.png";
+    private InputFile jokesOnYouFile;
+    private final Pattern jestOnTheePattern = Pattern.compile("jest'?s? ?(?:on|(?:be )?with) ?th(?:ee|ou)", Pattern.CASE_INSENSITIVE);
+    private final String jestOnTheeUrl = "http://i.imgur.com/SzxKs5a.png";
+    private InputFile jestOnTheeFile;
+
     public TopKekListener(TelegramBot bot) {
+        try {
+            this.jokesOnYouFile = new InputFile(new URL(jokesOnYouUrl));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.jestOnTheeFile = new InputFile(new URL(jestOnTheeUrl));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         textActions = new LinkedList<TextAction>() {{
             add(new TextAction((t, ev) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
@@ -57,6 +80,22 @@ public class TopKekListener implements Listener {
                 }
                 return reply;
             }));
+            if (jokesOnYouFile != null) {
+                add(new TextAction((t, ev) -> jokesOnYouPattern.matcher(t).find(), e -> {
+                    e.getChat().sendMessage(SendablePhotoMessage.builder()
+                            .photo(jokesOnYouFile)
+                            .build());
+                    return null;
+                }));
+            }
+            if (jestOnTheeFile != null) {
+                add(new TextAction((t, ev) -> jestOnTheePattern.matcher(t).find(), e -> {
+                    e.getChat().sendMessage(SendablePhotoMessage.builder()
+                            .photo(jestOnTheeFile)
+                            .build());
+                    return null;
+                }));
+            }
         }};
         this.bot = bot;
     }
@@ -64,6 +103,10 @@ public class TopKekListener implements Listener {
     @Override
     public void onTextMessageReceived(TextMessageReceivedEvent event) {
         String message = event.getContent().getContent();
-        textActions.stream().filter(t -> t.test(message, event)).limit(1).forEach(t -> event.getChat().sendMessage(t.apply(event)));
+        textActions.stream()
+                .map(t -> t.test(message, event) ? t.apply(event) : null)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(event.getChat()::sendMessage);
     }
 }
