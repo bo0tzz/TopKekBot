@@ -25,7 +25,9 @@ public class TopKekBot {
         instance = this;
         this.bot = TelegramBot.login(authToken);
         this.lastCommand = new HashMap<>();
-        System.out.println("Bot logged in: " + this.bot.toString());
+        if (this.bot == null)
+            throw new NullPointerException("Y U GIV ME BAD AUTH TOKEN!?!");
+        System.out.println("Bot logged in: " + this.bot.getBotUsername());
     }
 
     public static void main(String[] args) {
