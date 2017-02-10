@@ -70,7 +70,7 @@ public class TopKekListener implements Listener {
                 Random r = new SecureRandom(); // we don't want people guessing!!!
                 while ((index = s.indexOf("xd", index + 1)) != -1) {
                     m += "x";
-                    for (int i = 0; i < r.nextInt(16); i++) {
+                    for (int i = 0; i < r.nextInt(10); i++) {
                         m += xd[r.nextInt(4)];
                     }
                     m += "D";
