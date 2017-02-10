@@ -23,10 +23,10 @@ public class TopKekListener implements Listener {
     private final List<TextAction> textActions;
     private final String[] xd = {"x", "X", "d", "D"};
 
-    private final Pattern jokesOnYouPattern = Pattern.compile("joke'?s? ?on ?you", Pattern.CASE_INSENSITIVE);
+    private final Pattern jokesOnYouPattern = Pattern.compile("\\bjoke'?s?\\s+on\\s+you\\b", Pattern.CASE_INSENSITIVE);
     private final String jokesOnYouUrl = "http://i.imgur.com/4y6krel.png";
     private InputFile jokesOnYouFile;
-    private final Pattern jestOnTheePattern = Pattern.compile("jest'?s? ?(?:on|(?:be )?with) ?th(?:ee|ou)", Pattern.CASE_INSENSITIVE);
+    private final Pattern jestOnTheePattern = Pattern.compile("\\bjest'?s?\\s+(?:on|(?:be\\s+)?with)\\s+th(?:ee|ou)\\b", Pattern.CASE_INSENSITIVE);
     private final String jestOnTheeUrl = "http://i.imgur.com/SzxKs5a.png";
     private InputFile jestOnTheeFile;
 
