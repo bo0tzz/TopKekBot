@@ -2,6 +2,7 @@ package com.bo0tzz.topkekbot;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import pro.zackpollard.telegrambot.api.TelegramBot;
@@ -62,12 +63,17 @@ public class TopKekListener implements Listener {
                     (e) -> "Yes yes Zack, we get it, you're sick of our shit."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("girl") && ev.getMessage().getSender().getUsername().equalsIgnoreCase("MazenK"), (e) -> "April is watching..."));
             add(new TextAction((t, ev) -> t.contains("xD"), (e) -> {
-                Random r = new Random();
-                String m = "x";
-                for (int i = 0; i < r.nextInt(10); i++) {
-                    m += xd[r.nextInt(4)];
+                String s = e.getContent().getContent().toLowerCase();
+                int index = -1;
+                String m = "";
+                Random r = new SecureRandom(); // we don't want people guessing!!!
+                while ((index = s.indexOf("xd", index + 1)) != -1) {
+                    m += "x";
+                    for (int i = 0; i < r.nextInt(16); i++) {
+                        m += xd[r.nextInt(4)];
+                    }
+                    m += "D";
                 }
-                m += "D";
                 return m;
             }));
             add(new TextAction((t, ev) -> t.equals("tfw"), (e) -> {
