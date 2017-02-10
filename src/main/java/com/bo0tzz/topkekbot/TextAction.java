@@ -1,7 +1,6 @@
 package com.bo0tzz.topkekbot;
 
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
-import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
 import java.util.function.BiPredicate;
 import java.util.function.Function;
