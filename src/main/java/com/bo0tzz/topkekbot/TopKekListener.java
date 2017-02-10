@@ -1,19 +1,19 @@
 package com.bo0tzz.topkekbot;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.security.SecureRandom;
-import java.util.Objects;
-import java.util.regex.Pattern;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendablePhotoMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 /**
  * Created by bo0tzz
@@ -26,9 +26,10 @@ public class TopKekListener implements Listener {
 
     private final Pattern jokesOnYouPattern = Pattern.compile("\\bjoke'?s?\\s+on\\s+you\\b", Pattern.CASE_INSENSITIVE);
     private final String jokesOnYouUrl = "http://i.imgur.com/4y6krel.png";
-    private InputFile jokesOnYouFile;
     private final Pattern jestOnTheePattern = Pattern.compile("\\bjest'?s?\\s+(?:on|(?:be\\s+)?with)\\s+th(?:ee|ou)\\b", Pattern.CASE_INSENSITIVE);
     private final String jestOnTheeUrl = "http://i.imgur.com/SzxKs5a.png";
+    private final SecureRandom secureRandom = new SecureRandom();
+    private InputFile jokesOnYouFile;
     private InputFile jestOnTheeFile;
 
     public TopKekListener(TelegramBot bot) {
@@ -55,10 +56,17 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("oh canada"), (e) -> "http://i.imgur.com/bULAfzE.jpg"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Mazen is fat"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fish go moo"), (e) -> "@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened."));
-            add(new TextAction((t, ev) -> t.toLowerCase().endsWith("go moo"), (e) -> "What are you, fucking retarded?"));            add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
+            add(new TextAction((t, ev) -> t.toLowerCase().endsWith("go moo"), (e) -> "What are you, fucking retarded?"));
+            add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
             add(new TextAction((t, ev) -> t.contains("TridentSDK"), (e) -> "TridnetSDK is dead."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
-            add(new TextAction((t, ev) -> t.toLowerCase().equals("trump"), (e) -> "Lawdy lawdy lawdy, I dun seen the light, yes I did! He's come to save us all!"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("trump"), (e) -> {
+                int rand = secureRandom.nextInt(100);
+                if (rand < 15) {
+                    return "Lawdy lawdy lawdy, I dun seen the light, yes I did! He's come to save us all!";
+                }
+                return null;
+            }));
             add(new TextAction((t, ev) -> (t.contains("!!") || t.contains("ROFL")) && ev.getMessage().getSender().getUsername().equals("JulianAyy"), (e) -> "Autism!"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("*sigh*") && ev.getMessage().getSender().getUsername().equalsIgnoreCase("zackpollard"),
                     (e) -> "Yes yes Zack, we get it, you're sick of our shit."));
@@ -80,7 +88,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equals("tfw"), (e) -> {
                 String reply = "no ";
                 String lastCommand = TopKekBot.getInstance().getLastCommand().get(e.getMessage().getSender().getId());
-                if(lastCommand != null && lastCommand.equals("getgif")) {
+                if (lastCommand != null && lastCommand.equals("getgif")) {
                     reply += "gif";
                 } else {
                     reply += "gf";
