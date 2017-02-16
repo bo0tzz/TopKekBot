@@ -59,6 +59,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().endsWith("go moo"), (e) -> "What are you, fucking retarded?"));
             add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
             add(new TextAction((t, ev) -> t.contains("TridentSDK"), (e) -> "TridnetSDK is dead."));
+            add(new TextAction((t, ev) -> t.toLowerCase().contains("topkek"), (e) -> "[Gotta be safe while keking!](http://waitw.at/topkek)")); 
             add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trump"), (e) -> {
                 int rand = secureRandom.nextInt(100);
