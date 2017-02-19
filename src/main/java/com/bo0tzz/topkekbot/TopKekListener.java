@@ -48,7 +48,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().startsWith("@topkek_bot"), (e) -> e.getContent().getContent().substring(11)));
 
             //it's literally called "topkekbot" so this responds "kek" when someone says "top"
-            add(new TextAction((t, ev) -> t.toLowerCase().contains("top"), (e) -> "kek"));
+            add(new TextAction((t, ev) -> t.equalsignoreCase("top"), (e) -> "kek"));
 
             add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("blend"), (e) -> "But will it blend?"));
