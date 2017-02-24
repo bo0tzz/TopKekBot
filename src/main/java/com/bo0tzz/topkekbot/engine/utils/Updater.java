@@ -7,13 +7,15 @@ public class Updater implements Runnable {
     public void run() {
         while (true) {
             File file = new File("update_available");
+            System.out.println("Checking for file!");
             if (file.exists()) {
+                System.out.println("File existed. Attempting to restart!");
                 boolean res = file.delete();
                 if (res)
-                    System.exit(-1);
+                    System.exit(0);
             }
             try {
-                Thread.sleep(1000 * 30);
+                Thread.sleep(1000 * 5);
             } catch (Exception e) {
                 e.printStackTrace();
             }
