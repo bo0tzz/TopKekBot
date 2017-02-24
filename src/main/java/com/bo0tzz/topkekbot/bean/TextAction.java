@@ -1,4 +1,4 @@
-package com.bo0tzz.topkekbot;
+package com.bo0tzz.topkekbot.bean;
 
 import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEvent;
 
@@ -13,7 +13,7 @@ public class TextAction {
     private final BiPredicate<String, TextMessageReceivedEvent> predicate;
     private final Function<TextMessageReceivedEvent, String> function;
 
-    TextAction(BiPredicate<String, TextMessageReceivedEvent> predicate, Function<TextMessageReceivedEvent, String> function) {
+    public TextAction(BiPredicate<String, TextMessageReceivedEvent> predicate, Function<TextMessageReceivedEvent, String> function) {
         this.predicate = predicate;
         this.function = function;
     }

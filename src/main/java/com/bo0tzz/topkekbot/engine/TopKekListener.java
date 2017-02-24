@@ -1,5 +1,7 @@
-package com.bo0tzz.topkekbot;
+package com.bo0tzz.topkekbot.engine;
 
+import com.bo0tzz.topkekbot.TopKekBot;
+import com.bo0tzz.topkekbot.bean.TextAction;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendablePhotoMessage;
