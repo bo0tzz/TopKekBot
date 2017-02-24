@@ -21,13 +21,13 @@ deploy:
   on:
     repo: bo0tzz/TopKekBot
 before_install:
-- openssl aes-256-cbc -K $encrypted_af763b29458a_key -iv $encrypted_af763b29458a_iv
-  -in topkek.enc -out topkek -d
+- if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; then openssl aes-256-cbc -K $encrypted_af763b29458a_key -iv $encrypted_af763b29458a_iv
+  -in topkek.enc -out topkek -d; fi
 - echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
-- mv topkek ~/.ssh/id_rsa
-- chmod 600 ~/.ssh/id_rsa
-- ssh $DEPLOY_USER@$DEPLOY_HOST -q "/home/topkek/bots/TopKekBot/updater.sh" 2> /dev/null
+- if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; mv topkek ~/.ssh/id_rsa; fi
+- if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; chmod 600 ~/.ssh/id_rsa; fi
+- if [[ $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_BRANCH == "master" ]] ; ssh $DEPLOY_USER@$DEPLOY_HOST -q "/home/topkek/bots/TopKekBot/updater.sh" 2> /dev/null; fi
 env:
   global:
   - secure: iY83IcoYfgQX7G35WYj04e8JgIZqYwyzdl80n0sM9mgK3EIOFT/9nXscJKJZXrceCr1/ep0+L0KakF5M+I2+zyMMVwcnR6ZAMU8CXgV3PJG+FulTnzlIjvjE7MizKJt28cbroDLivn8zj3jhwC5pxMKcJOPkmPD1Yvo7Z4fbpWaA7mWIRCP6GwY0l3DAdnAe7aB4IavI4Vn7DAvJXu1JL+lLJ+nfg1HC2Xhzrx6j7wE4ZRNmW4JW2qjT4ptAmWQVSoZfMIaCnP1qrk4rIWh/mU8+67Yn30VJWyV2N2MOEVsElPwGKBTgL5DUE6GHkex3YQuF6UqzgfPVbdl0sZQW+87gyARw5Y72r+cG1lz8CqyNbEU5HUdvcJdPf5TTxBIc6a/k/QjD2uuu+VmfP4Q8n4eiKUftqSi1vAoUFpbIMV+7gonQ1xSE91fEoHrpIFnjTOQP7r1hNNnDMNxxHaqE4mtCUKQdJiNM5yiGGviEaDNNiLmFsj2Uo5IqlRBvYhjMSfJMCy/P7HvXeiEwsZNY7bSnk7GsFzc0JO+ypdnvAr4ozDC+YIh/DQgLexub9nzFyeFuIAyZ7jQioR9+2jnL4f9RGV68yZo1CIdhFxk2b+HCM1sSnb2SEzMRL8k668fZLBXfck2JcfOtPE85NVYjtLl0gveIMQwCo3MNn6r1DlY=
