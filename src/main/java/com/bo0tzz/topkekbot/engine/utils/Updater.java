@@ -7,7 +7,6 @@ public class Updater implements Runnable {
     public void run() {
         while (true) {
             File file = new File("update_available");
-            System.out.println("Checking for file!");
             if (file.exists()) {
                 System.out.println("File existed. Attempting to restart!");
                 boolean res = file.delete();
