@@ -1,25 +1,25 @@
 package com.bo0tzz.topkekbot;
 
-import java.util.Scanner;
+import com.bo0tzz.topkekbot.engine.TopKekCommandListener;
+import com.bo0tzz.topkekbot.engine.TopKekListener;
 import org.apache.commons.io.FileUtils;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.Chat;
-import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by bo0tzz
  */
 public class TopKekBot {
 
+    private static TopKekBot instance;
     private final TelegramBot bot;
     private final Map<Long, String> lastCommand;
-
-    private static TopKekBot instance;
 
     private TopKekBot(String authToken) {
         instance = this;
@@ -34,6 +34,20 @@ public class TopKekBot {
             System.exit(0);
         }
         new TopKekBot(args[0]).run();
+    }
+
+    public static TopKekBot getInstance() {
+
+        return instance;
+    }
+
+    public static String getGoogleKey() {
+        try {
+            return FileUtils.readFileToString(new File("gkey"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void run() {
@@ -71,18 +85,4 @@ public class TopKekBot {
 
         return lastCommand;
     }
-
-    public static TopKekBot getInstance() {
-
-        return instance;
-    }
-
-    public static String getGoogleKey() {
-        try {
-            return FileUtils.readFileToString(new File("gkey"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-     }
 }

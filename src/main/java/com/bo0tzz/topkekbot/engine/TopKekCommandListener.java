@@ -1,5 +1,7 @@
-package com.bo0tzz.topkekbot;
+package com.bo0tzz.topkekbot.engine;
 
+import com.bo0tzz.topkekbot.TopKekBot;
+import com.bo0tzz.topkekbot.engine.utils.Util;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
