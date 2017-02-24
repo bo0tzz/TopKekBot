@@ -23,7 +23,7 @@ before_install:
 - echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
 - mv topkek ~/.ssh/id_rsa
-- chmod 600 ~/.ssh/topkek
+- chmod 600 ~/.ssh/id_rsa
 - ssh $DEPLOY_USER@$DEPLOY_HOST "$DEPLOY_PATH/updater.sh"
 env:
   global:
