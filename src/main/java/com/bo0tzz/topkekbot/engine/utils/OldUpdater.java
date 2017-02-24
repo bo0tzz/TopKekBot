@@ -12,11 +12,11 @@ import java.net.URL;
 /**
  * Created by bo0tzz
  */
-public class Updater implements Runnable {
+public class OldUpdater implements Runnable {
 
     private final TopKekBot topKekBot;
 
-    public Updater(TopKekBot topKekBot) {
+    public OldUpdater(TopKekBot topKekBot) {
         this.topKekBot = topKekBot;
     }
 
