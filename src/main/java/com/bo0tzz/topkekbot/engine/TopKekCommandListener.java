@@ -131,7 +131,9 @@ public class TopKekCommandListener implements Listener {
             "What is grosser than ten dead babies nailed to a tree?\nOne dead baby nailed to ten trees.",
             "What is the worst part about killing a baby?\nGetting blood on your clown suit.",
             "What's harder than nailing a dead baby to a tree?\nMy dick while doing it.",
-            "What breaks when you give it to a baby?\nIt's pelvis."
+            "What breaks when you give it to a baby?\nIt's pelvis.",
+            "How many babies does it take to paint a barn?\nDepends on how hard you throw them.",
+            "Why do you put a baby in a blender feet first?\nSo you can look in it's eyes when you cum."
     };
     private static final String[] JOKES = new String[]{
             "Why does Japan have no feminists?\nBecause they hunt whales.",

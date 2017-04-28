@@ -70,6 +70,11 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("topkek"), (e) -> "[Gotta be safe while keking!](http://waitw.at/topkek)"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("drug") && ev.getMessage().getSender().getId() == 90092917, (e) -> "Visit @richdoesdrugs for more"));
+            add(new TextAction((t, ev) -> t.toLowerCase().contains("hong kong"), (e) -> {
+                SendableTextMessage msg = SendableTextMessage.builder().message("https://youtu.be/jEV9OymZ-Oo").disableWebPagePreview(true).build();
+                e.getChat().sendMessage(msg);
+                return null;
+            }));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trump"), (e) -> {
                 int rand = secureRandom.nextInt(100);
                 if (rand < 15) {
