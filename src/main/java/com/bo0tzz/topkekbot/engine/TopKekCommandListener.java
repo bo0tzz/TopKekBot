@@ -151,6 +151,7 @@ public class TopKekCommandListener implements Listener {
             "What is the definition of fun?\nPlaying fetch with a pitbull and a baby."
     };
     private static final String[] WHATWOULDMAZENSAY = new String[]{
+            "Vajayjay",
             "It's not love, it's common sense",
             "No, I'm not interested in having a girlfriend I find it a tremendous waste of time.",
             "Hi, my name is Santiago Gonzalez and I'm 14 and I like to program.",
