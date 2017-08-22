@@ -1,5 +1,4 @@
 # TopKekBot 
 A Telegram bot making use of the <a href="https://github.com/zackpollard/JavaTelegramBot-API">JavaTelegramBot-API</a>
 
-
-[![Build Status](https://travis-ci.org/bo0tzz/TopKekBot.svg?branch=master)](https://travis-ci.org/bo0tzz/TopKekBot)
+This is, like, 95% inside jokes. You can find this bot on Telegram at [@TopKek_Bot](http://t.me/topkek_bot)
