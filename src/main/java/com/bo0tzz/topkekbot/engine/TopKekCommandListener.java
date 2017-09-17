@@ -178,7 +178,7 @@ public class TopKekCommandListener implements Listener {
             "http://i.imgur.com/lojRU0P.png",
             "Halam motherfucker!"
     };
-    private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://waitw.at/topkek)").parseMode(ParseMode.MARKDOWN).build();
+    private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://v.bo0tzz.me/topkek)").parseMode(ParseMode.MARKDOWN).build();
     private static final SendableTextMessage SOURCE = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
     private final SecureRandom random = new SecureRandom();
     private final TelegramBot bot;
