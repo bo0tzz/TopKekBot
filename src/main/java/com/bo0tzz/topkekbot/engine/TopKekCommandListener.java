@@ -308,7 +308,7 @@ public class TopKekCommandListener implements Listener {
             StringBuilder out = new StringBuilder("Results: [");
             try {
                 int count = Integer.parseInt(num[0]);
-                int val = Integer.parseInt(num[1]) + 1;
+                int val = Integer.parseInt(num[1]);
                 if (count < 1 || val < 1 || count > 1000 || val > 1001) {
                     throw new IllegalArgumentException("topkek");
                 }
