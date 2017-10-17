@@ -54,6 +54,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("good night"), (e) -> "goodnight bb, sweet dreams \uD83D\uDE18\uD83D\uDE18\uD83D\uDE18❤️❤️❤️\uD83D\uDC8B\uD83D\uDC8B\uD83D\uDC8B"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("fuck off"), (e) -> "No you fuck off, fucking idiot."));
+            add(new TextAction((t, ev) -> t.toLowerCase().contains("humble brag"), (e) -> "It's not their fault that they're better than you."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("blend"), (e) -> "But will it blend?"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
