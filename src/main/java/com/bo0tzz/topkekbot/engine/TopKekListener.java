@@ -71,11 +71,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trident"), (e) -> secureRandom.nextInt(100) <= 15 ? "TridnetSDK is dead." : null));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("topkek"), (e) -> SendableTextMessage.markdown("[Gotta be safe while keking!](http://v.bo0tzz.me/topkek)").build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
-            add(new TextAction((t, ev) -> t.toLowerCase().contains("hong kong"), (e) -> {
-                SendableTextMessage msg = SendableTextMessage.builder().message("https://youtu.be/rAirFpUl97k").disableWebPagePreview(true).build();
-                e.getChat().sendMessage(msg);
-                return null;
-            }));
+            add(new TextAction((t, ev) -> t.toLowerCase().contains("hong kong"), (e) -> SendableTextMessage.builder().message("https://youtu.be/rAirFpUl97k").disableWebPagePreview(true).build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trump"), (e) -> {
                 int rand = secureRandom.nextInt(100);
                 if (rand < 15) {
