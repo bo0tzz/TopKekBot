@@ -30,11 +30,15 @@ public class TopKekBot {
     }
 
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("Missing auth token.");
-            System.exit(0);
+        String key = System.getenv("BOT_KEY");
+        if (key == null || key.equals("")) {
+            if (args.length < 1) {
+                System.out.println("Missing auth token.");
+                System.exit(0);
+            }
+            key = args[0];
         }
-        new TopKekBot(args[0]).run();
+        new TopKekBot(key).run();
     }
 
     public static TopKekBot getInstance() {
@@ -43,12 +47,16 @@ public class TopKekBot {
     }
 
     public static String getGoogleKey() {
-        try {
-            return FileUtils.readFileToString(new File("gkey"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        String key = System.getenv("GOOGLE_KEY");
+        if (key == null || key.equals("")) {
+            try {
+                key = FileUtils.readFileToString(new File("gkey"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
+        return key;
     }
 
     private void run() {
