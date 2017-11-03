@@ -67,21 +67,6 @@ public class TopKekBot {
         this.bot.startUpdates(false);
         System.out.println("Updates started.");
         this.sendToMazen("Bot just updated!\n\nOr maybe it just died and restarted.\n\nIt probably just died...");
-
-        Chat mazenchat = bot.getChat(-1001000055116L);
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                String in = scanner.nextLine();
-                if ("quit".equals(in)) {
-                    break;
-                }
-                if (mazenchat != null) {
-                    mazenchat.sendMessage(in);
-                } else {
-                    System.out.println("couldn't find mazen's chat :(");
-                }
-            }
-        }
     }
 
     public void sendToMazen(String message) {
