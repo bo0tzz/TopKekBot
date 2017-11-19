@@ -2,7 +2,6 @@ package com.bo0tzz.topkekbot;
 
 import com.bo0tzz.topkekbot.engine.TopKekCommandListener;
 import com.bo0tzz.topkekbot.engine.TopKekListener;
-import com.bo0tzz.topkekbot.engine.utils.Updater;
 import org.apache.commons.io.FileUtils;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.Chat;
@@ -11,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Created by bo0tzz
@@ -60,7 +58,6 @@ public class TopKekBot {
     }
 
     private void run() {
-        new Thread(new Updater()).start();
         this.bot.getEventsManager().register(new TopKekListener(this.bot));
         this.bot.getEventsManager().register(new TopKekCommandListener(this.bot));
         System.out.println("Listener Registered");
