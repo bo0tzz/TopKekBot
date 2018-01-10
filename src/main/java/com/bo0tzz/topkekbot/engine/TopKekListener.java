@@ -55,6 +55,8 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("fuck off"), (e) -> "No you fuck off, fucking idiot."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("humble brag"), (e) -> "It's not their fault that they're better than you."));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("not"), (e) -> "You - Not, Me - Bot"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("bot"), (e) -> "I'm a bot and still I'm smarter than you."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("blend"), (e) -> "But will it blend?"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
