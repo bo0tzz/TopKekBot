@@ -43,9 +43,9 @@ public class Util {
         } else if (temp >= 33 && temp <= 60) {
             t = "ITS FUCKING COLD!";
         } else if (temp >= 61 && temp <= 75) {
-            t = "ITS FUCKING NICE!";
+            t = "ITS FUCKING PERFECT";
         } else {
-            t = "ITS FUCKING HOT";
+            t = "ITS HOT AS FUCK";
         }
 
         return new String[]{t, "THE FUCKING WEATHER IN " + location.toUpperCase() + " IS " + temp + "F | " + metric + "C"};

@@ -137,7 +137,9 @@ public class TopKekCommandListener implements Listener {
     };
     private static final String[] JOKES = new String[]{
             "Why does Japan have no feminists?\nBecause they hunt whales.",
+            "Your life",
             "A leaf and an emo fall from the tree. Who hits the ground first?\nThe leaf. The rope stopped the emo.",
+            "You are communicating with a bot, what more do I need to say.",
             "What is a prdophiles favourite part about Halloween?\nFree Delivery",
             "How can you tell if your wife is dead?\nThe sex is the same but the dishes start piling up.",
             "When my Girlfriend got pregnant, everything changed.\nMy Name, My Address, My Phone Number.",
