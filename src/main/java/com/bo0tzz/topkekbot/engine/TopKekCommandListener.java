@@ -136,6 +136,7 @@ public class TopKekCommandListener implements Listener {
             "Why do you put a baby in a blender feet first?\nSo you can look in it's eyes when you cum."
     };
     private static final String[] JOKES = new String[]{
+            "redpill",
             "Why does Japan have no feminists?\nBecause they hunt whales.",
             "Your life",
             "A leaf and an emo fall from the tree. Who hits the ground first?\nThe leaf. The rope stopped the emo.",
@@ -149,6 +150,7 @@ public class TopKekCommandListener implements Listener {
             "What do you do if your lawn mower stops working?\nDeport him back to mexico.",
             "How are an alcoholic and a necrophiliac alike?\nThey both like to crack open a cold one.",
             "What do you call a child with a gun?\nMohammed.",
+            "Men's Rights Activism",
             "My first time having sex was a lot like my first football game. I was beaten and bloodied, but at least my dad came.",
             "What is the definition of fun?\nPlaying fetch with a pitbull and a baby."
     };
