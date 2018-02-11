@@ -79,7 +79,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("rawr"), (e) -> "xd"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trump"), (e) -> {
                 int rand = secureRandom.nextInt(100);
-                if (rand < 15) {
+                if (rand < 5) {
                     return "Lawdy lawdy lawdy, I dun seen the light, yes I did! He's come to save us all!";
                 }
                 return null;
