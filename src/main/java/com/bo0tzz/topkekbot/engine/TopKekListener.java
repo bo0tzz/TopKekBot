@@ -62,7 +62,6 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("hi"), (e) -> "sup"));
-            //add(new TextAction((t, ev) -> t.equalsIgnoreCase("lmao"), (e) -> "lmaolmaolmaolmaolmao"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("no u"), (e) -> "No, you."));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("sup"), (e) -> "hi"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("oh canada"), (e) -> "http://i.imgur.com/bULAfzE.jpg"));
@@ -72,6 +71,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().endsWith("go moo"), (e) -> "What are you, fucking retarded?"));
             add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
             add(new TextAction((t, ev) -> t.contains("@shibesquad"), (e) -> "+1"));
+            add(new TextAction((t, ev) -> t.contains("UUID"), (e) -> "Be careful with that UUID, you might get a collision!"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trident"), (e) -> secureRandom.nextInt(100) <= 15 ? "TridnetSDK is dead." : null));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("topkek"), (e) -> SendableTextMessage.markdown("[Gotta be safe while keking!](http://v.bo0tzz.me/topkek)").build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
