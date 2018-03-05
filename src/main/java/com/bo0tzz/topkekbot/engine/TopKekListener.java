@@ -91,16 +91,16 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.contains("xD"), (e) -> {
                 String s = e.getContent().getContent().toLowerCase();
                 int index = -1;
-                String m = "";
+                StringBuilder m = new StringBuilder();
                 Random r = new SecureRandom(); // we don't want people guessing!!!
                 while ((index = s.indexOf("xd", index + 1)) != -1) {
-                    m += "x";
+                    m.append("x");
                     for (int i = 0; i < r.nextInt(10); i++) {
-                        m += xd[r.nextInt(4)];
+                        m.append(xd[r.nextInt(4)]);
                     }
-                    m += "D";
+                    m.append("D");
                 }
-                return m;
+                return m.toString();
             }));
             add(new TextAction((t, ev) -> t.equals("tfw"), (e) -> {
                 String reply = "no ";

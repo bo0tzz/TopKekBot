@@ -13,6 +13,7 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.CommandMessageReceivedEvent;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import java.util.function.Consumer;
 
 /**
  * Created by bo0tzz
- * Enjoyed by stuntguy3000
+ * Enjoyed by a fat cunt
  * Delighted by Mazen
  * Sucked by aaomidi
  */
@@ -297,7 +298,14 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void lmgtfy(CommandMessageReceivedEvent event) {
-        String encoded = URLEncoder.encode(event.getArgsString());
+        String encoded;
+        try {
+            encoded = URLEncoder.encode(event.getArgsString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            event.getChat().sendMessage(SendableTextMessage.builder().message("I couldn't google that for you!").build());
+            return;
+        }
         if (encoded.isEmpty()) {
             event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build());
             event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/").build());
