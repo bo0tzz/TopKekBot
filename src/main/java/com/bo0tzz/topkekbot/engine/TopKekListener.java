@@ -2,6 +2,7 @@ package com.bo0tzz.topkekbot.engine;
 
 import com.bo0tzz.topkekbot.TopKekBot;
 import com.bo0tzz.topkekbot.bean.TextAction;
+import com.google.common.collect.Iterators;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendablePhotoMessage;
@@ -12,10 +13,7 @@ import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEve
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.SecureRandom;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -34,6 +32,8 @@ public class TopKekListener implements Listener {
     private final SecureRandom secureRandom = new SecureRandom();
     private InputFile jokesOnYouFile;
     private InputFile jestOnTheeFile;
+
+    private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
 
     public TopKekListener(TelegramBot bot) {
         try {
@@ -62,7 +62,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("hi"), (e) -> "sup"));
-            add(new TextAction((t, ev) -> t.equalsIgnoreCase("no u"), (e) -> "No, you."));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("no u"), (e) -> NO_U.next()));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("sup"), (e) -> "hi"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("oh canada"), (e) -> "http://i.imgur.com/bULAfzE.jpg"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Leo is fat"));
