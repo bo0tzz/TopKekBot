@@ -15,9 +15,19 @@
             <version>1.6.0</version>
         </dependency>
         <dependency>
+            <groupId>com.jtelegram</groupId>
+            <artifactId>jtelegrambotapi-core</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
             <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.8.0-beta1</version>
         </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>

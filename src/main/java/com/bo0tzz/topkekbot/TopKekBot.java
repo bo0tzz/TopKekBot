@@ -1,10 +1,12 @@
 package com.bo0tzz.topkekbot;
 
-import com.bo0tzz.topkekbot.engine.TopKekCommandListener;
-import com.bo0tzz.topkekbot.engine.TopKekListener;
+import com.jtelegram.api.TelegramBot;
+import com.jtelegram.api.TelegramBotRegistry;
+import com.jtelegram.api.ex.TelegramException;
+import com.jtelegram.api.update.PollingUpdateProvider;
 import org.apache.commons.io.FileUtils;
-import pro.zackpollard.telegrambot.api.TelegramBot;
-import pro.zackpollard.telegrambot.api.chat.Chat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,63 +19,58 @@ import java.util.Map;
 public class TopKekBot {
 
     private static TopKekBot instance;
-    private final TelegramBot bot;
-    private final Map<Long, String> lastCommand;
 
-    private TopKekBot(String authToken) {
-        instance = this;
-        this.bot = TelegramBot.login(authToken);
+    private Map<Long, String> lastCommand;
+
+    private TelegramBot bot;
+    private final Configuration configuration;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TopKekBot.class);
+
+    private TopKekBot(String[] args) {
+        this.configuration = new Configuration(args);
+
+        TelegramBotRegistry registry = TelegramBotRegistry.builder()
+                .updateProvider(new PollingUpdateProvider())
+                .eventThreadCount(10)
+                .build();
+
+        registry.registerBot(configuration.getTelegramKey(), this::setupTelegramBot);
+
         this.lastCommand = new HashMap<>();
-        System.out.println("Bot logged in: " + this.bot.toString());
+
     }
 
     public static void main(String[] args) {
-        String key = System.getenv("BOT_KEY");
-        if (key == null || key.equals("")) {
-            if (args.length < 1) {
-                System.out.println("Missing auth token.");
-                System.exit(0);
-            }
-            key = args[0];
+        TopKekBot.instance = new TopKekBot(args);
+    }
+
+    private void setupTelegramBot(com.jtelegram.api.TelegramBot telegramBot, TelegramException error) {
+
+        if (error != null) {
+            TopKekBot.handleFatalError(error);
         }
-        new TopKekBot(key).run();
+
+        this.bot = telegramBot;
+
+        //TODO register handlers
+
     }
 
-    public static TopKekBot getInstance() {
-
-        return instance;
+    public static void handleFatalError(Exception ex) {
+        LOGGER.error("Fatal error occurred!", ex);
+        System.exit(1);
     }
 
-    public static String getGoogleKey() {
-        String key = System.getenv("GOOGLE_KEY");
-        if (key == null || key.equals("")) {
-            try {
-                key = FileUtils.readFileToString(new File("gkey"));
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        return key;
+    public static void handleError(Exception ex) {
+        LOGGER.warn("Error occurred!", ex);
     }
 
-    private void run() {
-        this.bot.getEventsManager().register(new TopKekListener(this.bot));
-        this.bot.getEventsManager().register(new TopKekCommandListener(this.bot));
-        System.out.println("Listener Registered");
-        this.bot.startUpdates(false);
-        System.out.println("Updates started.");
-        this.sendToMazen("Bot just updated!\n\nOr maybe it just died and restarted.\n\nIt probably just died...");
-    }
-
-    public void sendToMazen(String message) {
-        Chat chat = bot.getChat(-1001000055116L);
-        if (chat != null)
-            chat.sendMessage(message);
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     public Map<Long, String> getLastCommand() {
-
         return lastCommand;
     }
 }
