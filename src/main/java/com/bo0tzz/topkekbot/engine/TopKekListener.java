@@ -69,6 +69,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("skinny"), (e) -> "Fatass"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fish go moo"), (e) -> SendableTextMessage.plain("@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened.").build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().endsWith("go moo"), (e) -> "What are you, fucking retarded?"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("moo"), (e) -> "woof"));
             add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
             add(new TextAction((t, ev) -> t.contains("@shibesquad"), (e) -> "+1"));
             add(new TextAction((t, ev) -> t.contains("UUID"), (e) -> "Be careful with that UUID, you might get a collision!"));
