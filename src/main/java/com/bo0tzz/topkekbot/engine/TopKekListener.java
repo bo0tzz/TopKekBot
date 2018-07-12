@@ -34,6 +34,7 @@ public class TopKekListener implements Listener {
     private InputFile jestOnTheeFile;
 
     private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
+    private final Iterator<String> U_ON = Iterators.cycle("ǝıʍo", "ɥɔno", "ɟoo");
 
     public TopKekListener(TelegramBot bot) {
         try {
@@ -63,6 +64,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("hi"), (e) -> "sup"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("no u"), (e) -> NO_U.next()));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("n ou"), (e) -> U_ON.next()));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("sup"), (e) -> "hi"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("oh canada"), (e) -> "http://i.imgur.com/bULAfzE.jpg"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Night is fat"));
