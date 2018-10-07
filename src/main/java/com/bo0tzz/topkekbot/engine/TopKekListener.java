@@ -121,8 +121,10 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> assPattern.matcher(t).matches(), (e) -> {
                 String message = e.getContent().getContent();
                 Matcher m = assPattern.matcher(message);
-                String ass = m.group(1) + " ass-" + m.group(2);
-                return ass;
+                if (m.matches() && m.groupCount() == 2) {
+                    return m.group(1) + " ass-" + m.group(2);
+                }
+                return null;
             }));
             if (jokesOnYouFile != null) {
                 add(new TextAction((t, ev) -> jokesOnYouPattern.matcher(t).find(), e -> {
