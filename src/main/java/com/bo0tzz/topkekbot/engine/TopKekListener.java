@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -32,6 +33,8 @@ public class TopKekListener implements Listener {
     private final SecureRandom secureRandom = new SecureRandom();
     private InputFile jokesOnYouFile;
     private InputFile jestOnTheeFile;
+
+    private final Pattern assPattern = Pattern.compile("(\\w*)-ass (\\w*)", Pattern.CASE_INSENSITIVE);
 
     private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
     private final Iterator<String> U_ON = Iterators.cycle("ǝıʍo", "ɥɔno", "ɟoo");
@@ -114,6 +117,12 @@ public class TopKekListener implements Listener {
                     reply += "gf";
                 }
                 return reply;
+            }));
+            add(new TextAction((t, ev) -> assPattern.matcher(t).matches(), (e) -> {
+                String message = e.getContent().getContent();
+                Matcher m = assPattern.matcher(message);
+                String ass = m.group(1) + " ass-" + m.group(2);
+                return ass;
             }));
             if (jokesOnYouFile != null) {
                 add(new TextAction((t, ev) -> jokesOnYouPattern.matcher(t).find(), e -> {
