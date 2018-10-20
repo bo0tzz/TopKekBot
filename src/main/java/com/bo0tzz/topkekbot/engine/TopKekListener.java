@@ -2,6 +2,7 @@ package com.bo0tzz.topkekbot.engine;
 
 import com.bo0tzz.topkekbot.TopKekBot;
 import com.bo0tzz.topkekbot.bean.TextAction;
+import com.google.common.collect.Iterators;
 import pro.zackpollard.telegrambot.api.TelegramBot;
 import pro.zackpollard.telegrambot.api.chat.message.send.InputFile;
 import pro.zackpollard.telegrambot.api.chat.message.send.SendablePhotoMessage;
@@ -12,10 +13,8 @@ import pro.zackpollard.telegrambot.api.event.chat.message.TextMessageReceivedEve
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.SecureRandom;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -34,6 +33,11 @@ public class TopKekListener implements Listener {
     private final SecureRandom secureRandom = new SecureRandom();
     private InputFile jokesOnYouFile;
     private InputFile jestOnTheeFile;
+
+    private final Pattern assPattern = Pattern.compile("(\\w*)-ass (\\w*)", Pattern.CASE_INSENSITIVE);
+
+    private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
+    private final Iterator<String> U_ON = Iterators.cycle("ǝıʍo", "ɥɔno", "ɟoo");
 
     public TopKekListener(TelegramBot bot) {
         try {
@@ -55,19 +59,25 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("pleb"), (e) -> "Pleb, yes"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("fuck off"), (e) -> "No you fuck off, fucking idiot."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("humble brag"), (e) -> "It's not their fault that they're better than you."));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("not"), (e) -> "You - Not, Me - Bot"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("bot"), (e) -> "I'm a bot and still smarter than you."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("blend"), (e) -> "But will it blend?"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("thank mr bot"), (e) -> "may good cpus and dedotated wams come to you"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("nice meme"), (e) -> "http://niceme.me/nicememe.mp3"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("true love"), (e) -> "http://i.imgur.com/nRAZBRs.png"));
-            add(new TextAction((t, ev) -> t.toLowerCase().contains("flickr.com/photos/stuntguy3000"), (e) -> "Nobody likes your photos, Luke"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("hi"), (e) -> "sup"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("no u"), (e) -> NO_U.next()));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("n ou"), (e) -> U_ON.next()));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("sup"), (e) -> "hi"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("oh canada"), (e) -> "http://i.imgur.com/bULAfzE.jpg"));
-            add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Amir is fat"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("fat"), (e) -> "Night is fat"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("skinny"), (e) -> "Fatass"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("fish go moo"), (e) -> SendableTextMessage.plain("@TopKek_Bot notices that " + e.getMessage().getSender().getFullName() + " is truly enlightened.").build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().endsWith("go moo"), (e) -> "What are you, fucking retarded?"));
+            add(new TextAction((t, ev) -> t.equalsIgnoreCase("moo"), (e) -> "woof"));
             add(new TextAction((t, ev) -> t.contains("@topkek_bot"), (e) -> "topkek"));
             add(new TextAction((t, ev) -> t.contains("@shibesquad"), (e) -> "+1"));
+            add(new TextAction((t, ev) -> t.contains("UUID"), (e) -> "Be careful with that UUID, you might get a collision!"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trident"), (e) -> secureRandom.nextInt(100) <= 15 ? "TridnetSDK is dead." : null));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("topkek"), (e) -> SendableTextMessage.markdown("[Gotta be safe while keking!](http://v.bo0tzz.me/topkek)").build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
@@ -75,7 +85,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.toLowerCase().contains("rawr"), (e) -> "xd"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trump"), (e) -> {
                 int rand = secureRandom.nextInt(100);
-                if (rand < 15) {
+                if (rand < 5) {
                     return "Lawdy lawdy lawdy, I dun seen the light, yes I did! He's come to save us all!";
                 }
                 return null;
@@ -87,16 +97,16 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.contains("xD"), (e) -> {
                 String s = e.getContent().getContent().toLowerCase();
                 int index = -1;
-                String m = "";
+                StringBuilder m = new StringBuilder();
                 Random r = new SecureRandom(); // we don't want people guessing!!!
                 while ((index = s.indexOf("xd", index + 1)) != -1) {
-                    m += "x";
+                    m.append("x");
                     for (int i = 0; i < r.nextInt(10); i++) {
-                        m += xd[r.nextInt(4)];
+                        m.append(xd[r.nextInt(4)]);
                     }
-                    m += "D";
+                    m.append("D");
                 }
-                return m;
+                return m.toString();
             }));
             add(new TextAction((t, ev) -> t.equals("tfw"), (e) -> {
                 String reply = "no ";
@@ -107,6 +117,14 @@ public class TopKekListener implements Listener {
                     reply += "gf";
                 }
                 return reply;
+            }));
+            add(new TextAction((t, ev) -> assPattern.matcher(t).matches(), (e) -> {
+                String message = e.getContent().getContent();
+                Matcher m = assPattern.matcher(message);
+                if (m.matches() && m.groupCount() == 2) {
+                    return m.group(1) + " ass-" + m.group(2);
+                }
+                return null;
             }));
             if (jokesOnYouFile != null) {
                 add(new TextAction((t, ev) -> jokesOnYouPattern.matcher(t).find(), e -> {

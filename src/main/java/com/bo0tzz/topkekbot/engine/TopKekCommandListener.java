@@ -13,6 +13,7 @@ import pro.zackpollard.telegrambot.api.chat.message.send.SendableTextMessage;
 import pro.zackpollard.telegrambot.api.event.Listener;
 import pro.zackpollard.telegrambot.api.event.chat.message.CommandMessageReceivedEvent;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import java.util.function.Consumer;
 
 /**
  * Created by bo0tzz
- * Enjoyed by stuntguy3000
+ * Enjoyed by a fat cunt
  * Delighted by Mazen
  * Sucked by aaomidi
  */
@@ -136,9 +137,12 @@ public class TopKekCommandListener implements Listener {
             "Why do you put a baby in a blender feet first?\nSo you can look in it's eyes when you cum."
     };
     private static final String[] JOKES = new String[]{
+            "redpill",
             "Why does Japan have no feminists?\nBecause they hunt whales.",
+            "Your life",
             "A leaf and an emo fall from the tree. Who hits the ground first?\nThe leaf. The rope stopped the emo.",
-            "What is a prdophiles favourite part about Halloween?\nFree Delivery",
+            "You are communicating with a bot, what more do I need to say.",
+            "What is a pedophile's favourite part about Halloween?\nFree Delivery",
             "How can you tell if your wife is dead?\nThe sex is the same but the dishes start piling up.",
             "When my Girlfriend got pregnant, everything changed.\nMy Name, My Address, My Phone Number.",
             "What’s the difference between feminists & Hockey Players?\nHockey Players shower after three periods.",
@@ -147,6 +151,7 @@ public class TopKekCommandListener implements Listener {
             "What do you do if your lawn mower stops working?\nDeport him back to mexico.",
             "How are an alcoholic and a necrophiliac alike?\nThey both like to crack open a cold one.",
             "What do you call a child with a gun?\nMohammed.",
+            "Men's Rights Activism",
             "My first time having sex was a lot like my first football game. I was beaten and bloodied, but at least my dad came.",
             "What is the definition of fun?\nPlaying fetch with a pitbull and a baby."
     };
@@ -294,7 +299,14 @@ public class TopKekCommandListener implements Listener {
     }
 
     private void lmgtfy(CommandMessageReceivedEvent event) {
-        String encoded = URLEncoder.encode(event.getArgsString());
+        String encoded;
+        try {
+            encoded = URLEncoder.encode(event.getArgsString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            event.getChat().sendMessage(SendableTextMessage.builder().message("I couldn't google that for you!").build());
+            return;
+        }
         if (encoded.isEmpty()) {
             event.getChat().sendMessage(SendableTextMessage.builder().message("Here, use this to help resolve your life's issues.").build());
             event.getChat().sendMessage(SendableTextMessage.builder().message("http://lmgtfy.com/").build());
