@@ -181,7 +181,8 @@ public class TopKekCommandListener implements Listener {
             "Less halawa more carrot aaomidi",
             "I live in Vancouver, which is practically Asia. Soon enough British Columbia will be renamed to Asian Columbia",
             "http://i.imgur.com/lojRU0P.png",
-            "Halam motherfucker!"
+            "Halam motherfucker!",
+            "Its pronounced \"Quiche\"."
     };
     private static final SendableTextMessage TOPKEK = SendableTextMessage.builder().message("[Gotta be safe while keking!](http://v.bo0tzz.me/topkek)").parseMode(ParseMode.MARKDOWN).build();
     private static final SendableTextMessage SOURCE = SendableTextMessage.builder().message("The bot's source can be found over on [GitHub](https://github.com/bo0tzz/TopKekBot)").parseMode(ParseMode.MARKDOWN).build();
