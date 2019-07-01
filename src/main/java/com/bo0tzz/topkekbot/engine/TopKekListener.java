@@ -80,10 +80,7 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> t.contains("UUID"), (e) -> "Be careful with that UUID, you might get a collision!"));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trident"), (e) -> secureRandom.nextInt(100) <= 15 ? "TridnetSDK is dead." : null));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("topkek"), (e) -> SendableTextMessage.markdown("[Gotta be safe while keking!](http://v.bo0tzz.me/topkek)").build(), false));
-            add(new TextAction((t, ev) -> t.toLowerCase().contains("retarded"), (e) -> "Intriguing"));
-            add(new TextAction((t, ev) -> t.toLowerCase().contains("hong kong"), (e) -> SendableTextMessage.builder().message("https://youtu.be/rAirFpUl97k").disableWebPagePreview(true).build(), false));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("rawr"), (e) -> "xd"));
-            add(new TextAction((t, ev) -> t.toLowerCase().contains("trap"), (e) -> "That's a fat yikes from me."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("trump"), (e) -> {
                 int rand = secureRandom.nextInt(100);
                 if (rand < 5) {
@@ -91,7 +88,6 @@ public class TopKekListener implements Listener {
                 }
                 return null;
             }));
-            add(new TextAction((t, ev) -> (t.contains("!!") || t.contains("ROFL")) && ev.getMessage().getSender().getUsername().equals("JulianAyy"), (e) -> "Autism!"));
             add(new TextAction((t, ev) -> t.equalsIgnoreCase("*sigh*") && ev.getMessage().getSender().getUsername().equalsIgnoreCase("zackpollard"),
                     (e) -> "Yes yes Zack, we get it, you're sick of our shit."));
             add(new TextAction((t, ev) -> t.toLowerCase().contains("girl") && ev.getMessage().getSender().getUsername().equalsIgnoreCase("MazenK"), (e) -> "April is watching..."));
