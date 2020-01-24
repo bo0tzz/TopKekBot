@@ -34,7 +34,7 @@ public class TopKekListener implements Listener {
     private InputFile jokesOnYouFile;
     private InputFile jestOnTheeFile;
 
-    private final Pattern assPattern = Pattern.compile("(\\w*)-ass (\\w*)", Pattern.CASE_INSENSITIVE);
+    private final Pattern assPattern = Pattern.compile("(\\w+)-ass (\\w+)", Pattern.CASE_INSENSITIVE);
 
     private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
     private final Iterator<String> U_ON = Iterators.cycle("ǝıʍo", "ɥɔno", "ɟoo");
@@ -115,7 +115,7 @@ public class TopKekListener implements Listener {
                 }
                 return reply;
             }));
-            add(new TextAction((t, ev) -> assPattern.matcher(t).matches(), (e) -> {
+            add(new TextAction((t, ev) -> assPattern.matcher(t).find(), (e) -> {
                 String message = e.getContent().getContent();
                 Matcher m = assPattern.matcher(message);
                 if (m.matches() && m.groupCount() == 2) {
