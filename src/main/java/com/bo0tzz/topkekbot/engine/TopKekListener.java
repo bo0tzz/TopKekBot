@@ -36,7 +36,7 @@ public class TopKekListener implements Listener {
 
     private final Pattern assPattern = Pattern.compile("(\\w+)-ass (\\w+)", Pattern.CASE_INSENSITIVE);
 
-    private final Pattern subredditPattern = Pattern.compile("/r/(\\w+)[\\s$]", Pattern.CASE_INSENSITIVE);
+    private final Pattern subredditPattern = Pattern.compile("/r/(\\w+)[\\s$]?", Pattern.CASE_INSENSITIVE);
 
     private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
     private final Iterator<String> U_ON = Iterators.cycle("ǝıʍo", "ɥɔno", "ɟoo");
