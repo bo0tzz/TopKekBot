@@ -120,24 +120,18 @@ public class TopKekListener implements Listener {
             add(new TextAction((t, ev) -> assPattern.matcher(t).find(), (e) -> {
                 String message = e.getContent().getContent();
                 Matcher m = assPattern.matcher(message);
-                if (m.matches() && m.groupCount() == 2) {
-                    return m.group(1) + " ass-" + m.group(2);
-                }
-                return null;
+                return m.group(1) + " ass-" + m.group(2);
             }));
             add(new TextAction((t, ev) -> subredditPattern.matcher(t).find(), (e) -> {
                 String message = e.getContent().getContent();
                 Matcher m = subredditPattern.matcher(message);
-                if (m.matches()) {
-                    String subreddit = m.group(1);
-                    String markdown = "[/r/";
-                    markdown += subreddit;
-                    markdown += "](https://old.reddit.com/r/";
-                    markdown += subreddit;
-                    markdown += ")";
-                    return SendableTextMessage.markdown(markdown).build();
-                }
-                return null;
+                String subreddit = m.group(1);
+                String markdown = "[/r/";
+                markdown += subreddit;
+                markdown += "](https://old.reddit.com/r/";
+                markdown += subreddit;
+                markdown += ")";
+                return SendableTextMessage.markdown(markdown).build();
             }, false));
             if (jokesOnYouFile != null) {
                 add(new TextAction((t, ev) -> jokesOnYouPattern.matcher(t).find(), e -> {
