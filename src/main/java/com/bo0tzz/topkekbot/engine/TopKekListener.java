@@ -36,6 +36,8 @@ public class TopKekListener implements Listener {
 
     private final Pattern assPattern = Pattern.compile("(\\w+)-ass (\\w+)", Pattern.CASE_INSENSITIVE);
 
+    private final Pattern subredditPattern = Pattern.compile("/r/(\\w+)[\\s$]", Pattern.CASE_INSENSITIVE);
+
     private final Iterator<String> NO_U = Iterators.cycle("oof", "ouch", "owie");
     private final Iterator<String> U_ON = Iterators.cycle("ǝıʍo", "ɥɔno", "ɟoo");
 
@@ -123,6 +125,20 @@ public class TopKekListener implements Listener {
                 }
                 return null;
             }));
+            add(new TextAction((t, ev) -> subredditPattern.matcher(t).find(), (e) -> {
+                String message = e.getContent().getContent();
+                Matcher m = subredditPattern.matcher(message);
+                if (m.matches()) {
+                    String subreddit = m.group(1);
+                    String markdown = "[/r/";
+                    markdown += subreddit;
+                    markdown += "](https://old.reddit.com/r/";
+                    markdown += subreddit;
+                    markdown += ")";
+                    return SendableTextMessage.markdown(markdown).build();
+                }
+                return null;
+            }, false));
             if (jokesOnYouFile != null) {
                 add(new TextAction((t, ev) -> jokesOnYouPattern.matcher(t).find(), e -> {
                     e.getChat().sendMessage(SendablePhotoMessage.builder()
